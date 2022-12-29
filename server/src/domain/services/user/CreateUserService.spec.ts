@@ -1,3 +1,4 @@
+import { compare } from 'bcrypt';
 import { CreateUserService } from '@/src/domain/services/user/CreateUserService';
 import { InMemoryUserRepository } from '@/test/repositories/inMemoryUserRepository';
 
@@ -16,8 +17,9 @@ describe('Create user', () => {
     expect(user).toEqual(
       expect.objectContaining({
         email: '_any@email.com',
-        password: '_anypass',
       })
     );
+
+    expect(await compare(data.password, user.password));
   });
 });
