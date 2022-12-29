@@ -14,5 +14,6 @@ module.exports = {
   rules: {
     'no-undef': 'off',
     'prettier/prettier': ['error'],
+    '@typescript-eslint/no-non-null-assertion': 'off',
   },
 };
