@@ -1,3 +1,5 @@
+import { hash } from 'bcrypt';
+
 import { UserModel } from '@/src/domain/models';
 import { UserRepository } from '@/src/infra/repositories';
 
@@ -11,6 +13,10 @@ export class CreateUserService {
   constructor(private userRepository: UserRepository) {}
 
   async execute(data: CreateUserRequest): Promise<UserModel> {
+    const hashedPassword = await hash(data.password, 8);
+
+    data.password = hashedPassword;
+
     return await this.userRepository.create(data);
   }
 }
