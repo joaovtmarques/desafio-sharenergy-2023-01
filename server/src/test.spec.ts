@@ -4,6 +4,6 @@ describe('', () => {
   test('', () => {
     const any = new Any();
 
-    expect(any._any()).toEqual('Any');
+    expect(any._any()).toBe('Any');
   });
 });
