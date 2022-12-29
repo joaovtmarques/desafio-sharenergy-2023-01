@@ -8,4 +8,12 @@ export class PrismaUserRepository implements UserRepository {
       data,
     });
   }
+
+  async findByEmail(email: string): Promise<UserModel> {
+    return await prismaClient.user.findFirstOrThrow({
+      where: {
+        email,
+      },
+    });
+  }
 }

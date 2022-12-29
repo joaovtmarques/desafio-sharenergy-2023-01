@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { UserModel } from '@/src/domain/models';
 
 export interface CreateUserData {
@@ -6,6 +7,7 @@ export interface CreateUserData {
 }
 
 export interface UserRepository {
-  // eslint-disable-next-line no-unused-vars
   create(data: CreateUserData): Promise<UserModel>;
+
+  findByEmail(email: string): Promise<UserModel>;
 }
