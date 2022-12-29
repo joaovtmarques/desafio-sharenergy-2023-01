@@ -6,3 +6,31 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id              String   @id @default(uuid()) @map("_id")
+  email           String
+  password        String
+  rememberMeToken String?
+  createdAt       DateTime @default(now())
+}
+
+model Customer {
+  id          String   @id @default(uuid()) @map("_id")
+  name        String
+  email       String
+  phoneNumber String
+  cpf         String
+  address     Address?
+}
+
+model Address {
+  id         String    @id @default(uuid()) @map("_id")
+  street     String
+  district   String
+  zipcode    String
+  city       String
+  state      String
+  customer   Customer? @relation(fields: [customerId], references: [id])
+  customerId String    @unique
+}
