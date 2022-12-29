@@ -5,6 +5,8 @@
   "license": "MIT",
   "scripts": {
     "test": "jest --passWithNoTests",
+    "test:watch": "yarn test --watch",
+    "test:staged": "yarn test --findRelatedTests",
     "husky:prepare": "cd .. && husky install server/.husky"
   },
   "devDependencies": {
