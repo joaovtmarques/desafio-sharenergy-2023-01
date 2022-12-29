@@ -1,4 +1,4 @@
-import { Any } from '.';
+import { Any } from '@/index';
 
 describe('', () => {
   test('', () => {
