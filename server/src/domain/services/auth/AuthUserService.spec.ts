@@ -23,4 +23,18 @@ describe('Authenticate an user', () => {
       })
     );
   });
+
+  it('should return error when user is not found', async () => {
+    const inMemoryUserRepository = new InMemoryUserRepository();
+    const authUserService = new AuthUserService(inMemoryUserRepository);
+
+    const action = async () => {
+      await authUserService.execute({
+        email: '_any@email.com',
+        password: '_anypassword',
+      });
+    };
+
+    expect(action()).rejects.toThrow('User not found');
+  });
 });
