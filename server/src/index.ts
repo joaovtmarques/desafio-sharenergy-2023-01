@@ -1,5 +1,3 @@
-export class Any {
-  _any() {
-    return 'Any';
-  }
-}
+import * as dotenv from 'dotenv';
+
+dotenv.config();
