@@ -1,8 +1,10 @@
+import { compare } from 'bcrypt';
+import { sign } from 'jsonwebtoken';
+
 import { UserRepository } from '@/src/infra/repositories';
 import { BaseError } from '@/src/shared/classes/baseError';
 import { HttpStatusCode } from '@/src/shared/types/httpModel';
-import { compare } from 'bcrypt';
-import { sign } from 'jsonwebtoken';
+import { GenerateRefreshToken } from '@/src/domain/provider/GenerateRefreshTokenProvider';
 
 interface AuthRequest {
   email: string;
@@ -17,6 +19,7 @@ export class AuthUserService {
     const userExists = await this.userRepository.findByEmail(data.email);
 
     let token = '';
+    let refreshToken;
 
     if (userExists) {
       if (!(await compare(data.password, userExists.password))) {
@@ -30,11 +33,14 @@ export class AuthUserService {
           subject: userExists.id,
           expiresIn: '20d',
         });
+
+        const generateRefreshToken = new GenerateRefreshToken();
+        refreshToken = generateRefreshToken.execute(userExists.id);
       }
     } else {
       throw new BaseError('User not found', 'authenticateUser', HttpStatusCode.NOT_FOUND);
     }
 
-    return { token };
+    return { token, refreshToken };
   }
 }
