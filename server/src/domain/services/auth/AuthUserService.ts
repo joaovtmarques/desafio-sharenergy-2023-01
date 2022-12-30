@@ -29,8 +29,8 @@ export class AuthUserService {
       );
     }
 
-    const generateToken = new GenerateToken();
-    const token = await generateToken.execute(userExists);
+    const generateToken = new GenerateToken(this.userRepository);
+    const token = await generateToken.execute(userExists.id);
 
     const generateRefreshToken = new GenerateRefreshToken();
     const refreshToken = await generateRefreshToken.execute(userExists.id);

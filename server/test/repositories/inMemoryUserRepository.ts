@@ -41,4 +41,20 @@ export class InMemoryUserRepository implements UserRepository {
       throw new BaseError('User not found', 'authenticateUser', HttpStatusCode.NOT_FOUND);
     }
   }
+
+  async findById(id: string): Promise<UserModel> {
+    let user = null;
+
+    this.items.forEach((item) => {
+      if (item.id === id) {
+        user = item;
+      }
+    });
+
+    if (!user) {
+      throw new BaseError('User not found', 'authenticateUser', HttpStatusCode.NOT_FOUND);
+    }
+
+    return user;
+  }
 }

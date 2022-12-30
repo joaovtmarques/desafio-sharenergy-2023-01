@@ -8,12 +8,11 @@ datasource db {
 }
 
 model User {
-  id              String        @id @default(uuid()) @map("_id")
-  email           String
-  password        String
-  rememberMeToken String?
-  createdAt       DateTime      @default(now())
-  refreshToken    RefreshToken?
+  id           String        @id @default(uuid()) @map("_id")
+  email        String
+  password     String
+  createdAt    DateTime      @default(now())
+  refreshToken RefreshToken?
 }
 
 model RefreshToken {
