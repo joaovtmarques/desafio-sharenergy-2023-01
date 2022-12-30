@@ -37,4 +37,26 @@ describe('Authenticate an user', () => {
 
     expect(action()).rejects.toThrow('User not found');
   });
+
+  it('should return error when providing wrong password', async () => {
+    const inMemoryUserRepository = new InMemoryUserRepository();
+    const authUserService = new AuthUserService(inMemoryUserRepository);
+    const createUserService = new CreateUserService(inMemoryUserRepository);
+
+    const data = {
+      email: '_any@email.com',
+      password: '_anypassword',
+    };
+
+    await createUserService.execute(data);
+
+    const action = async () => {
+      await authUserService.execute({
+        email: data.email,
+        password: '_wrongpassword',
+      });
+    };
+
+    expect(action()).rejects.toThrow('Incorrect email or password');
+  });
 });
