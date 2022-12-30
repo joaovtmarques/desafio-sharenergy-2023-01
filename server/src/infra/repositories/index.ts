@@ -1,3 +1,4 @@
+import { CustomerRepository } from './CustomerRepository';
 import { UserRepository } from './UserRepository';
 
-export { UserRepository };
+export { CustomerRepository, UserRepository };
