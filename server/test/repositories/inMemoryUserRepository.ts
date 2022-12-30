@@ -4,6 +4,8 @@ import { UserModel } from '@/src/domain/models';
 
 import { UserRepository } from '../../src/infra/repositories';
 import { CreateUserData } from '../../src/infra/repositories/UserRepository';
+import { BaseError } from '@/src/shared/classes/baseError';
+import { HttpStatusCode } from '@/src/shared/types/httpModel';
 
 export class InMemoryUserRepository implements UserRepository {
   public items: UserModel[] = [];
@@ -36,7 +38,7 @@ export class InMemoryUserRepository implements UserRepository {
     if (user !== null) {
       return user;
     } else {
-      throw new Error('User not found');
+      throw new BaseError('User not found', 'authenticateUser', HttpStatusCode.NOT_FOUND);
     }
   }
 }

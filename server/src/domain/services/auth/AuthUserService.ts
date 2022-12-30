@@ -1,4 +1,6 @@
 import { UserRepository } from '@/src/infra/repositories';
+import { BaseError } from '@/src/shared/classes/baseError';
+import { HttpStatusCode } from '@/src/shared/types/httpModel';
 import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 
@@ -18,13 +20,19 @@ export class AuthUserService {
 
     if (userExists) {
       if (!(await compare(data.password, userExists.password))) {
-        throw new Error('Incorrect email or password');
+        throw new BaseError(
+          'Incorrect email or password',
+          'authenticateUser',
+          HttpStatusCode.BAD_REQUEST
+        );
       } else {
         token = sign({}, `${process.env.JWT_SECRET}`, {
           subject: userExists.id,
           expiresIn: '20d',
         });
       }
+    } else {
+      throw new BaseError('User not found', 'authenticateUser', HttpStatusCode.NOT_FOUND);
     }
 
     return { token };

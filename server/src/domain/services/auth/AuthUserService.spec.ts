@@ -1,3 +1,5 @@
+import { BaseError } from '@/src/shared/classes/baseError';
+import { HttpStatusCode } from '@/src/shared/types/httpModel';
 import { InMemoryUserRepository } from '@/test/repositories/inMemoryUserRepository';
 import { CreateUserService } from './../user/CreateUserService';
 import { AuthUserService } from './AuthUserService';
@@ -35,7 +37,9 @@ describe('Authenticate an user', () => {
       });
     };
 
-    expect(action()).rejects.toThrow('User not found');
+    expect(action()).rejects.toThrow(
+      new BaseError('User not found', 'authenticateUser', HttpStatusCode.NOT_FOUND)
+    );
   });
 
   it('should return error when providing wrong password', async () => {
@@ -57,6 +61,8 @@ describe('Authenticate an user', () => {
       });
     };
 
-    expect(action()).rejects.toThrow('Incorrect email or password');
+    expect(action()).rejects.toThrow(
+      new BaseError('Incorrect email or password', 'authenticateUser', HttpStatusCode.BAD_REQUEST)
+    );
   });
 });

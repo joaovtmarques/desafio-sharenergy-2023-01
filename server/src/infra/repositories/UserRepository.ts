@@ -9,5 +9,5 @@ export interface CreateUserData {
 export interface UserRepository {
   create(data: CreateUserData): Promise<UserModel>;
 
-  findByEmail(email: string): Promise<UserModel>;
+  findByEmail(email: string): Promise<UserModel | null>;
 }
