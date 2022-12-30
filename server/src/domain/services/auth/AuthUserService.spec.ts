@@ -119,4 +119,15 @@ describe('Authenticate an user', () => {
       })
     );
   });
+
+  it('should return error when providing invalid refresh token', async () => {
+    const inMemoryUserRepository = new InMemoryUserRepository();
+    const refreshTokenService = new RefreshTokenUserService(inMemoryUserRepository);
+
+    const action = async () => await refreshTokenService.execute('_invalidrefreshtoken');
+
+    expect(action()).rejects.toThrow(
+      new BaseError('Invalid refresh token', 'refreshToken', HttpStatusCode.BAD_REQUEST)
+    );
+  });
 });
