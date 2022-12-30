@@ -1,5 +1,5 @@
 import { UserRepository } from '@/src/infra/repositories';
-// import { compare } from 'bcrypt';
+import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 
 interface AuthRequest {
@@ -14,10 +14,18 @@ export class AuthUserService {
   async execute(data: AuthRequest) {
     const userExists = await this.userRepository.findByEmail(data.email);
 
-    const token = sign({}, `${process.env.JWT_SECRET}`, {
-      subject: userExists.id,
-      expiresIn: '20d',
-    });
+    let token = '';
+
+    if (userExists) {
+      if (!(await compare(data.password, userExists.password))) {
+        throw new Error('Incorrect email or password');
+      } else {
+        token = sign({}, `${process.env.JWT_SECRET}`, {
+          subject: userExists.id,
+          expiresIn: '20d',
+        });
+      }
+    }
 
     return { token };
   }
