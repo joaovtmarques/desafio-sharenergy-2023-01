@@ -65,4 +65,12 @@ export class PrismaCustomerRepository implements CustomerRepository {
       include: { address: true },
     });
   }
+
+  async delete(customerId: string): Promise<void> {
+    await prismaClient.customer.delete({
+      where: {
+        id: customerId,
+      },
+    });
+  }
 }

@@ -22,4 +22,6 @@ export interface CustomerRepository {
   findById(customerId: string): Promise<CustomerModel | null>;
 
   update(customerId: string, data: CreateCustomerRequest): Promise<CustomerModel>;
+
+  delete(customerId: string): Promise<void>;
 }
