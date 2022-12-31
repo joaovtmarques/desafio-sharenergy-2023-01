@@ -1,6 +1,6 @@
 import { CustomerRepository } from '@/src/infra/repositories';
 import { BaseError } from '@/src/shared/classes/baseError';
-import { HttpStatusCode } from '@/src/shared/types/httpModel';
+import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
 
 import { CustomerModel } from '../../models';
 

@@ -5,7 +5,7 @@ import { UserModel } from '@/src/domain/models';
 import { UserRepository } from '../../src/infra/repositories';
 import { CreateUserData } from '../../src/infra/repositories/UserRepository';
 import { BaseError } from '@/src/shared/classes/baseError';
-import { HttpStatusCode } from '@/src/shared/types/httpModel';
+import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
 
 export class InMemoryUserRepository implements UserRepository {
   public items: UserModel[] = [];

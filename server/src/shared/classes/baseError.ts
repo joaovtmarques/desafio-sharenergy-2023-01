@@ -1,4 +1,4 @@
-import { HttpStatusCode } from '../types/httpModel';
+import { HttpStatusCode } from '../types/httpStatusCode';
 
 export class BaseError extends Error {
   methodName: string;

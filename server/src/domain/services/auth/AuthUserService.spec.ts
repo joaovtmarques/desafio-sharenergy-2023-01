@@ -1,5 +1,5 @@
 import { BaseError } from '@/src/shared/classes/baseError';
-import { HttpStatusCode } from '@/src/shared/types/httpModel';
+import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
 import { InMemoryUserRepository } from '@/test/repositories/inMemoryUserRepository';
 import { CreateUserService } from './../user/CreateUserService';
 import { AuthUserService } from './AuthUserService';
