@@ -1,4 +1,7 @@
+import { BaseError } from '@/src/shared/classes/baseError';
+import { HttpStatusCode } from '@/src/shared/types/httpModel';
 import { InMemoryCustomerRepository } from '@/test/repositories/inMemoryCustomerRepository';
+
 import { CreateCustomerService } from '../CreateCustomerService';
 import { DeleteCustomerService } from '../DeleteCustomerService';
 import { FindCustomerByIdService } from '../FindCustomerByIdService';
@@ -29,5 +32,16 @@ describe('Delete an user', () => {
     const customerExists = await findCustomerByIdService.execute(customer.id);
 
     expect(customerExists).toBeNull();
+  });
+
+  it('should return error when customer not found', async () => {
+    const inMemoryCustomerRepository = new InMemoryCustomerRepository();
+    const deleteCustomerService = new DeleteCustomerService(inMemoryCustomerRepository);
+
+    const action = async () => await deleteCustomerService.execute('_anycustomerid');
+
+    expect(action()).rejects.toThrow(
+      new BaseError('Customer not found', 'deleteCustomer', HttpStatusCode.NOT_FOUND)
+    );
   });
 });

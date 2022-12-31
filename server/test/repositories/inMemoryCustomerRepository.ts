@@ -1,12 +1,8 @@
-import crypto from 'node:crypto';
 import { CustomerModel } from '@/src/domain/models';
-
+import { CreateCustomerRequest } from '@/src/domain/services/customer/UpdateCustomerService';
 import { CustomerRepository } from '@/src/infra/repositories';
 import { CreateCustomerData } from '@/src/infra/repositories/CustomerRepository';
-import { CreateCustomerRequest } from '@/src/domain/services/customer/UpdateCustomerService';
-
-// import { BaseError } from '@/src/shared/classes/baseError';
-// import { HttpStatusCode } from '@/src/shared/types/httpModel';
+import crypto from 'node:crypto';
 
 export class InMemoryCustomerRepository implements CustomerRepository {
   public items: CustomerModel[] = [];
