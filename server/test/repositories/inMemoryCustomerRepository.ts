@@ -71,4 +71,12 @@ export class InMemoryCustomerRepository implements CustomerRepository {
 
     return customer!;
   }
+
+  async delete(customerId: string): Promise<void> {
+    this.items.forEach((item, index) => {
+      if (item.id === customerId) {
+        this.items.splice(index, 1);
+      }
+    });
+  }
 }
