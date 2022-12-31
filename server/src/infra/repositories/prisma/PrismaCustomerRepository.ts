@@ -1,4 +1,5 @@
 import { CustomerModel } from '@/src/domain/models';
+import { CreateCustomerRequest } from '@/src/domain/services/customer/UpdateCustomerService';
 import prismaClient from '@/src/prisma';
 import { CreateCustomerData, CustomerRepository } from './../CustomerRepository';
 
@@ -29,6 +30,30 @@ export class PrismaCustomerRepository implements CustomerRepository {
       include: {
         address: true,
       },
+    });
+  }
+
+  async update(customerId: string, data: CreateCustomerRequest): Promise<CustomerModel> {
+    return await prismaClient.customer.update({
+      where: {
+        id: customerId,
+      },
+      data: {
+        name: data.name,
+        email: data.email,
+        cpf: data.cpf,
+        phoneNumber: data.phoneNumber,
+        address: {
+          update: {
+            street: data.address?.street,
+            district: data.address?.district,
+            zipcode: data.address?.zipcode,
+            city: data.address?.city,
+            state: data.address?.state,
+          },
+        },
+      },
+      include: { address: true },
     });
   }
 }

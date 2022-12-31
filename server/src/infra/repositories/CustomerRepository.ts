@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { CustomerModel } from '@/src/domain/models';
+import { CreateCustomerRequest } from '@/src/domain/services/customer/UpdateCustomerService';
 
 export interface CreateCustomerData {
   name: string;
@@ -17,4 +18,6 @@ export interface CustomerRepository {
   create(data: CreateCustomerData): Promise<CustomerModel>;
 
   findAll(): Promise<CustomerModel[]>;
+
+  update(customerId: string, data: CreateCustomerRequest): Promise<CustomerModel>;
 }
