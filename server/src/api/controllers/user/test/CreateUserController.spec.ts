@@ -18,4 +18,10 @@ describe('Create user', () => {
       })
     );
   });
+
+  it('should return error when required data to create user is not valid', async () => {
+    const response = await request(app).post('/users').send({});
+
+    expect(response.status).toBe(400);
+  });
 });
