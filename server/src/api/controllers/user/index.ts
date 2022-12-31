@@ -1,3 +1,3 @@
-import { CreateUserController } from './CreateUserController';
+import { createUserFactory } from './CreateUserFactory';
 
-export { CreateUserController };
+export { createUserFactory };

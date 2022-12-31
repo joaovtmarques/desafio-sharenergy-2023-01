@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { createUserFactory } from '../controllers/user/CreateUserFactory';
+import { createUserFactory } from '../controllers/user';
 
 const user = Router();
 
