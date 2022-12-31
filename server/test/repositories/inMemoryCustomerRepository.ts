@@ -40,6 +40,18 @@ export class InMemoryCustomerRepository implements CustomerRepository {
     return this.items;
   }
 
+  async findById(customerId: string): Promise<CustomerModel | null> {
+    let customer = null;
+
+    this.items.forEach((item) => {
+      if (item.id === customerId) {
+        customer = item;
+      }
+    });
+
+    return customer;
+  }
+
   async update(customerId: string, data: CreateCustomerRequest): Promise<CustomerModel> {
     const customer = this.items.find((o, i) => {
       if (o.id === customerId) {

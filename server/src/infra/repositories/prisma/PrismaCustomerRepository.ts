@@ -33,6 +33,15 @@ export class PrismaCustomerRepository implements CustomerRepository {
     });
   }
 
+  async findById(customerId: string): Promise<CustomerModel | null> {
+    return await prismaClient.customer.findFirst({
+      where: {
+        id: customerId,
+      },
+      include: { address: true },
+    });
+  }
+
   async update(customerId: string, data: CreateCustomerRequest): Promise<CustomerModel> {
     return await prismaClient.customer.update({
       where: {

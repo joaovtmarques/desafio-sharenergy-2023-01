@@ -19,5 +19,7 @@ export interface CustomerRepository {
 
   findAll(): Promise<CustomerModel[]>;
 
+  findById(customerId: string): Promise<CustomerModel | null>;
+
   update(customerId: string, data: CreateCustomerRequest): Promise<CustomerModel>;
 }
