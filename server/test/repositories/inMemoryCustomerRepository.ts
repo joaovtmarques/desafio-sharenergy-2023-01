@@ -34,4 +34,8 @@ export class InMemoryCustomerRepository implements CustomerRepository {
 
     return customer;
   }
+
+  async findAll(): Promise<CustomerModel[]> {
+    return this.items;
+  }
 }

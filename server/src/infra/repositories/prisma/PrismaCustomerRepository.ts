@@ -23,4 +23,12 @@ export class PrismaCustomerRepository implements CustomerRepository {
       include: { address: true },
     });
   }
+
+  async findAll(): Promise<CustomerModel[]> {
+    return await prismaClient.customer.findMany({
+      include: {
+        address: true,
+      },
+    });
+  }
 }

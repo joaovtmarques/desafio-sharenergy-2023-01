@@ -15,4 +15,6 @@ export interface CreateCustomerData {
 
 export interface CustomerRepository {
   create(data: CreateCustomerData): Promise<CustomerModel>;
+
+  findAll(): Promise<CustomerModel[]>;
 }
