@@ -1,4 +1,7 @@
+import { BaseError } from '@/src/shared/classes/baseError';
+import { HttpStatusCode } from '@/src/shared/types/httpModel';
 import { InMemoryCustomerRepository } from '@/test/repositories/inMemoryCustomerRepository';
+
 import { CreateCustomerService } from '../CreateCustomerService';
 import { UpdateCustomerService } from '../UpdateCustomerService';
 
@@ -72,6 +75,31 @@ describe('Update an customer', () => {
           customerId: expect.stringContaining(customer.address!.customerId),
         }),
       })
+    );
+  });
+
+  it('should return error when customer is not found', async () => {
+    const inMemoryCustomerRepository = new InMemoryCustomerRepository();
+    const updateCustomerService = new UpdateCustomerService(inMemoryCustomerRepository);
+
+    const action = async () => {
+      await updateCustomerService.execute('_anycustomerid', {
+        name: '_anycustomer',
+        email: '_any@email.com',
+        phoneNumber: '00000000000',
+        cpf: '000.000.000-00',
+        address: {
+          street: '_anystreet, 000',
+          district: '_anydistrict',
+          zipcode: '00000000',
+          city: '_anycity',
+          state: '_anystate',
+        },
+      });
+    };
+
+    expect(action).rejects.toThrow(
+      new BaseError('Customer not found', 'updateCustomer', HttpStatusCode.NOT_FOUND)
     );
   });
 });
