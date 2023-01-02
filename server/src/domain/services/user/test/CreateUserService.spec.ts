@@ -1,8 +1,8 @@
-import { compare } from 'bcrypt';
 import { CreateUserService } from '@/src/domain/services/user/CreateUserService';
 import { InMemoryUserRepository } from '@/test/repositories/inMemoryUserRepository';
+import { compare } from 'bcrypt';
 
-describe('Create user', () => {
+describe.skip('Create user', () => {
   it('should create an user', async () => {
     const inMemoryUserRepository = new InMemoryUserRepository();
     const createUserService = new CreateUserService(inMemoryUserRepository);

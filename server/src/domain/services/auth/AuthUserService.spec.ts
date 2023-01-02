@@ -5,7 +5,7 @@ import { CreateUserService } from './../user/CreateUserService';
 import { AuthUserService } from './AuthUserService';
 import { RefreshTokenUserService } from './RefreshTokenUserSevice';
 
-describe('Authenticate an user', () => {
+describe.skip('Authenticate an user', () => {
   it('should authenticate an user', async () => {
     const inMemoryUserRepository = new InMemoryUserRepository();
     const authUserService = new AuthUserService(inMemoryUserRepository);

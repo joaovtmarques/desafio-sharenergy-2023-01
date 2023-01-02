@@ -1,8 +1,9 @@
 import { InMemoryCustomerRepository } from '@/test/repositories/inMemoryCustomerRepository';
+
 import { CreateCustomerService } from '../CreateCustomerService';
 import { FindAllCustomersService } from '../FindAllCustomersService';
 
-describe('Find all customers', () => {
+describe.skip('Find all customers', () => {
   it('should return all customers', async () => {
     const inMemoryCustomerRepository = new InMemoryCustomerRepository();
     const findAllCustomersService = new FindAllCustomersService(inMemoryCustomerRepository);

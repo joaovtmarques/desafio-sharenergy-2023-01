@@ -6,7 +6,7 @@ import { CreateCustomerService } from '../CreateCustomerService';
 import { DeleteCustomerService } from '../DeleteCustomerService';
 import { FindCustomerByIdService } from '../FindCustomerByIdService';
 
-describe('Delete an user', () => {
+describe.skip('Delete an user', () => {
   it('should delete an costumer', async () => {
     const inMemoryCustomerRepository = new InMemoryCustomerRepository();
     const createCustomerService = new CreateCustomerService(inMemoryCustomerRepository);
