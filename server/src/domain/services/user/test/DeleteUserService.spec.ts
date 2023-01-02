@@ -4,14 +4,14 @@ import { InMemoryUserRepository } from '@/test/repositories/inMemoryUserReposito
 
 import { CreateUserService } from '../CreateUserService';
 import { DeleteUserService } from '../DeleteUserService';
-import { FindUserById } from '../FindUserByIdService';
+import { FindUserByIdService } from '../FindUserByIdService';
 
 describe('Delete an user', () => {
   it('should delete an user', async () => {
     const inMemoryUserRepository = new InMemoryUserRepository();
     const createUserService = new CreateUserService(inMemoryUserRepository);
     const deleteUserService = new DeleteUserService(inMemoryUserRepository);
-    const findUserById = new FindUserById(inMemoryUserRepository);
+    const findUserById = new FindUserByIdService(inMemoryUserRepository);
 
     const data = {
       email: '_any@email.com',

@@ -1,3 +1,5 @@
-import { createUserFactory } from './CreateUserFactory';
+import { createUserFactory } from './factories/CreateUserFactory';
+import { deleteUserFactory } from './factories/DeleteUserFactory';
+import { findUserByIdFactory } from './factories/FindUserByIdFactory';
 
-export { createUserFactory };
+export { createUserFactory, deleteUserFactory, findUserByIdFactory };
