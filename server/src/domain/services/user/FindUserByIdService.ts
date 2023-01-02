@@ -1,7 +1,7 @@
 import { UserRepository } from '@/src/infra/repositories';
 import { UserModel } from '../../models';
 
-export class FindUserById {
+export class FindUserByIdService {
   // eslint-disable-next-line no-unused-vars
   constructor(private userRepository: UserRepository) {}
 
