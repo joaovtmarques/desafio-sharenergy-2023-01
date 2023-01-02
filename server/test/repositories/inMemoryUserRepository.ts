@@ -1,11 +1,11 @@
+import { UserModel } from '@/src/domain/models';
+import { BaseError } from '@/src/shared/classes/baseError';
+import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
 import { hash } from 'bcrypt';
 import crypto from 'node:crypto';
-import { UserModel } from '@/src/domain/models';
 
 import { UserRepository } from '../../src/infra/repositories';
 import { CreateUserData } from '../../src/infra/repositories/UserRepository';
-import { BaseError } from '@/src/shared/classes/baseError';
-import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
 
 export class InMemoryUserRepository implements UserRepository {
   public items: UserModel[] = [];
@@ -17,7 +17,6 @@ export class InMemoryUserRepository implements UserRepository {
       id: crypto.randomUUID(),
       email: data.email,
       password: hashedPassword,
-      rememberMeToken: null,
       createdAt: new Date(),
     };
 
@@ -42,7 +41,7 @@ export class InMemoryUserRepository implements UserRepository {
     }
   }
 
-  async findById(id: string): Promise<UserModel> {
+  async findById(id: string): Promise<UserModel | null> {
     let user = null;
 
     this.items.forEach((item) => {
@@ -51,10 +50,14 @@ export class InMemoryUserRepository implements UserRepository {
       }
     });
 
-    if (!user) {
-      throw new BaseError('User not found', 'authenticateUser', HttpStatusCode.NOT_FOUND);
-    }
-
     return user;
+  }
+
+  async delete(id: string): Promise<void> {
+    this.items.forEach((item, index) => {
+      if (item.id === id) {
+        this.items.splice(index, 1);
+      }
+    });
   }
 }
