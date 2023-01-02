@@ -11,10 +11,10 @@ export class FindUserByIdController {
 
     const user = await this.findUserByIdService.execute(id);
 
-    if (!user) {
-      next(new UserNotFoundException(`User {${id}} not found`, 'findUserById'));
+    if (user) {
+      return res.status(200).send(user);
     }
 
-    return res.status(200).send(user);
+    next(new UserNotFoundException(`User {${id}} not found`, 'findUserById'));
   }
 }
