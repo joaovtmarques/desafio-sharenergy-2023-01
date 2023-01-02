@@ -17,4 +17,13 @@ describe('Delete user', () => {
     expect(userExists.status).toBe(404);
     expect(userExists.body.message).toBe(`User {${user.body.id}} not found`);
   });
+
+  it('should return error when user to delete not found', async () => {
+    const userId = '_anyuserid';
+
+    const response = await request(app).delete(`/users/${userId}`).send();
+
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBe(`User {${userId}} not found`);
+  });
 });
