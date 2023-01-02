@@ -1,3 +1,4 @@
+import { auth } from './AuthRoutes';
 import { user } from './UserRoutes';
 
-export { user };
+export { auth, user };
