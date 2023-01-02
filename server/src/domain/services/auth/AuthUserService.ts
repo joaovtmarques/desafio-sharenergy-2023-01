@@ -18,7 +18,11 @@ export class AuthUserService {
     const userExists = await this.userRepository.findByEmail(data.email);
 
     if (!userExists) {
-      throw new BaseError('User not found', 'authenticateUser', HttpStatusCode.NOT_FOUND);
+      throw new BaseError(
+        'Incorrect email or password',
+        'authenticateUser',
+        HttpStatusCode.BAD_REQUEST
+      );
     }
 
     if (!(await compare(data.password, userExists.password))) {

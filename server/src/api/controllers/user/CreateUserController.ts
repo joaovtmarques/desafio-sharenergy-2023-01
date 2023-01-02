@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 import { CreateUserService } from '@/src/domain/services/user/CreateUserService';
-import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
 import { HttpRequest } from '@/src/shared/types/httpRequest';
+import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
+
 import { validateCreateUserData } from '../../validators/CreateUserValidator';
 
 export class CreateUserController {
