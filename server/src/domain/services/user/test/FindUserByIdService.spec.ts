@@ -1,13 +1,13 @@
 import { InMemoryUserRepository } from '@/test/repositories/inMemoryUserRepository';
 
 import { CreateUserService } from '../CreateUserService';
-import { FindUserById } from '../FindUserByIdService';
+import { FindUserByIdService } from '../FindUserByIdService';
 
 describe.skip('Find user by id', () => {
   it('should find an user by id', async () => {
     const inMemoryUserRepository = new InMemoryUserRepository();
     const createUserService = new CreateUserService(inMemoryUserRepository);
-    const findUserById = new FindUserById(inMemoryUserRepository);
+    const findUserById = new FindUserByIdService(inMemoryUserRepository);
 
     const data = {
       email: '_any@email.com',
