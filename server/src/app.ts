@@ -1,8 +1,9 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
 
-import { auth, user } from './api/routes';
+import { EnsureAutheticatedMiddleware } from './api/middlewares/EnsureAuthenticatedMiddleware';
 import { ErrorMiddleware } from './api/middlewares/ErrorMiddleware';
+import { auth, user } from './api/routes';
 
 dotenv.config();
 
@@ -13,5 +14,6 @@ app.use(user);
 app.use(auth);
 
 app.use(ErrorMiddleware);
+app.use(EnsureAutheticatedMiddleware);
 
 export { app };
