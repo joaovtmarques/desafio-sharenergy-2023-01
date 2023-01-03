@@ -1,4 +1,5 @@
 import { app } from '@/src/app';
+
 import supertest from 'supertest';
 import request, { Response } from 'supertest';
 
@@ -31,5 +32,16 @@ describe('Refresh token user', () => {
         token: expect.any(String),
       })
     );
+  });
+
+  it('should return error when refresh token is invalid', async () => {
+    const response = await supertest(app)
+      .post('/refresh-token')
+      .send({ refreshToken: '_anyrefreshtoken' });
+
+    expect(response.status).toBe(400);
+    expect(response.body.message).toEqual('Invalid refresh token');
+    expect(response.body.method).toEqual('refreshToken');
+    expect(response.body.statusCode).toEqual(400);
   });
 });
