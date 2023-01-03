@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import {
   createCustomerFactory,
+  deleteCustomerFactory,
   findAllCustomersFactory,
   findCustomerByIdFactory,
 } from '../controllers/customer';
@@ -14,6 +15,9 @@ customer.get('/customers', (req, res, next) =>
 );
 customer.get('/customers/:id', (req, res, next) =>
   findCustomerByIdFactory().handle({ req, res, next })
+);
+customer.delete('/customers/:id', (req, res, next) =>
+  deleteCustomerFactory().handle({ req, res, next })
 );
 
 export { customer };
