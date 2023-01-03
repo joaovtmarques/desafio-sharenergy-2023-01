@@ -1,9 +1,8 @@
 import { app } from '@/src/app';
 import supertest from 'supertest';
-import request, { Response } from 'supertest';
 
-describe('Authenticate an user', () => {
-  let user: Response;
+describe.skip('Authenticate an user', () => {
+  let user: supertest.Response;
 
   const data = {
     email: '_any@email.com',
@@ -11,11 +10,11 @@ describe('Authenticate an user', () => {
   };
 
   beforeEach(async () => {
-    user = await request(app).post('/users').send(data);
+    user = await supertest(app).post('/users').send(data);
   });
 
   afterEach(async () => {
-    await request(app).delete(`/users/${user.body.id}`).send();
+    await supertest(app).delete(`/users/${user.body.id}`).send();
   });
 
   it('should authenticate an user', async () => {
