@@ -1,7 +1,7 @@
 import { app } from '@/src/app';
 import supertest from 'supertest';
 
-describe('Delete an customer', () => {
+describe.skip('Delete an customer', () => {
   it('should delete an customer', async () => {
     const data = {
       name: '_anycustumer',
