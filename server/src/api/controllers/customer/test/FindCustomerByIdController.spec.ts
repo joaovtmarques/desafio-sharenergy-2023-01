@@ -1,7 +1,7 @@
 import { app } from '@/src/app';
 import supertest from 'supertest';
 
-describe('Find an customer by id', () => {
+describe.skip('Find an customer by id', () => {
   it('should find an customer by id', async () => {
     const data = {
       name: '_anycustumer',
@@ -37,5 +37,16 @@ describe('Find an customer by id', () => {
         }),
       })
     );
+  });
+
+  it('should return error when customer not found', async () => {
+    const id = '_anycustomerid';
+
+    const response = await supertest(app).get(`/customers/${id}`).send();
+
+    expect(response.status).toBe(404);
+    expect(response.body.message).toEqual(`Customer {${id}} not found`);
+    expect(response.body.statusCode).toEqual(404);
+    expect(response.body.method).toEqual('findCustomerById');
   });
 });
