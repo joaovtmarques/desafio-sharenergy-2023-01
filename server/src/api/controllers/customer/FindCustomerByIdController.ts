@@ -1,6 +1,7 @@
 import { FindCustomerByIdService } from '@/src/domain/services/customer/FindCustomerByIdService';
 import { HttpRequest } from '@/src/shared/types/httpRequest';
 import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
+import { CustomerNotFoundException } from '../../exceptions/CustomerNotFoundException';
 
 export class FindCustomerByIdController {
   constructor(private findCustomerById: FindCustomerByIdService) {}
@@ -10,6 +11,10 @@ export class FindCustomerByIdController {
 
     const customer = await this.findCustomerById.execute(id);
 
-    return res.status(HttpStatusCode.OK).send(customer);
+    if (customer) {
+      return res.status(HttpStatusCode.OK).send(customer);
+    }
+
+    next(new CustomerNotFoundException(`Customer {${id}} not found`, 'findCustomerById'));
   }
 }
