@@ -26,4 +26,15 @@ describe('Delete an customer', () => {
     expect(customerExists.body.statusCode).toEqual(404);
     expect(customerExists.body.method).toEqual('findCustomerById');
   });
+
+  it('should return error when customer not found', async () => {
+    const id = '_anycustomerid';
+
+    const response = await supertest(app).delete(`/customers/${id}`).send();
+
+    expect(response.status).toBe(404);
+    expect(response.body.message).toEqual(`Customer {${id}} not found`);
+    expect(response.body.statusCode).toEqual(404);
+    expect(response.body.method).toEqual('deleteCustomer');
+  });
 });
