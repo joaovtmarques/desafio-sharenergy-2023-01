@@ -37,4 +37,10 @@ describe('Create an customer', () => {
       })
     );
   });
+
+  it('should return error when data to create customer is not provided', async () => {
+    const customer = await supertest(app).post('/customers').send({});
+
+    expect(customer.status).toBe(400);
+  });
 });
