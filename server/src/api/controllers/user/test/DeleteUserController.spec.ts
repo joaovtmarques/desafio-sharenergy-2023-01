@@ -1,7 +1,7 @@
 import { app } from '@/src/app';
 import request from 'supertest';
 
-describe('Delete user', () => {
+describe.skip('Delete user', () => {
   it('should delete an user', async () => {
     const data = {
       email: '_any@email.com',

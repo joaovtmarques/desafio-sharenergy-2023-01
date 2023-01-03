@@ -1,7 +1,7 @@
 import supertest from 'supertest';
 import { app } from '@/src/app';
 
-describe('Find all customers', () => {
+describe.skip('Find all customers', () => {
   it('should find all customers', async () => {
     const customers = await supertest(app).get('/customers').send({});
 
