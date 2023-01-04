@@ -2,7 +2,9 @@ import { app } from '@/src/app';
 import supertest from 'supertest';
 
 describe('Update an customer', () => {
-  it('should update an customer', async () => {
+  let customer: supertest.Response;
+
+  beforeEach(async () => {
     const data = {
       name: '_anycustomer',
       email: '_any@email.com',
@@ -15,8 +17,14 @@ describe('Update an customer', () => {
       state: '_anystate',
     };
 
-    const customer = await supertest(app).post('/customers').send(data);
+    customer = await supertest(app).post('/customers').send(data);
+  });
 
+  afterEach(async () => {
+    await supertest(app).delete(`/customers/${customer.body.id}`).send();
+  });
+
+  it('should update an customer', async () => {
     const updatedData = {
       name: '_updatedname',
       email: '_any@email.com',
@@ -72,7 +80,11 @@ describe('Update an customer', () => {
         }),
       })
     );
+  });
 
-    await supertest(app).delete(`/customers/${customer.body.id}`).send();
+  it('should return error when required data is not provided', async () => {
+    const response = await supertest(app).put(`/customers/${customer.body.id}`).send({});
+
+    expect(response.status).toBe(400);
   });
 });
