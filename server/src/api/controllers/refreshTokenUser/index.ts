@@ -1,3 +1,3 @@
-import { refreshTokenUserFactory } from './RefreshTokenUserFactory';
+import { refreshTokenUserFactory } from './factories/RefreshTokenUserFactory';
 
 export { refreshTokenUserFactory };

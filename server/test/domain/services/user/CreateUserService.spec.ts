@@ -1,5 +1,5 @@
 import { CreateUserService } from '@/src/domain/services/user/CreateUserService';
-import { InMemoryUserRepository } from '@/test/repositories/inMemoryUserRepository';
+import { InMemoryUserRepository } from '@/test/infra/repositories/inMemoryUserRepository';
 import { compare } from 'bcrypt';
 
 describe.skip('Create user', () => {

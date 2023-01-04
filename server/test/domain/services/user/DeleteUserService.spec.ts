@@ -1,6 +1,6 @@
 import { BaseError } from '@/src/shared/classes/baseError';
 import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
-import { InMemoryUserRepository } from '@/test/repositories/inMemoryUserRepository';
+import { InMemoryUserRepository } from '@/test/infra/repositories/inMemoryUserRepository';
 
 import { CreateUserService } from '../CreateUserService';
 import { DeleteUserService } from '../DeleteUserService';

@@ -1,6 +1,6 @@
 import { AuthUserService } from '@/src/domain/services/auth/AuthUserService';
 import { PrismaUserRepository } from '@/src/infra/repositories/prisma/PrismaUserRepository';
-import { AuthUserController } from './AuthUserController';
+import { AuthUserController } from '../AuthUserController';
 
 export const authUserFactory = () => {
   const userRepository = new PrismaUserRepository();

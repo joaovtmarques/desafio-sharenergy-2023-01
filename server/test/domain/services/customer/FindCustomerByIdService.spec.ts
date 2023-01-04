@@ -1,4 +1,4 @@
-import { InMemoryCustomerRepository } from '@/test/repositories/inMemoryCustomerRepository';
+import { InMemoryCustomerRepository } from '@/test/infra/repositories/inMemoryCustomerRepository';
 
 import { CreateCustomerService } from '../CreateCustomerService';
 import { FindCustomerByIdService } from '../FindCustomerByIdService';

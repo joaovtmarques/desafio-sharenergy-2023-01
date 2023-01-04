@@ -1,3 +1,3 @@
-import { authUserFactory } from './AuthUserFactory';
+import { authUserFactory } from './factories/AuthUserFactory';
 
 export { authUserFactory };

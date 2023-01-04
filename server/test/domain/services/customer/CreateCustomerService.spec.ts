@@ -1,6 +1,6 @@
-import { InMemoryCustomerRepository } from '@/test/repositories/inMemoryCustomerRepository';
+import { InMemoryCustomerRepository } from '@/test/infra/repositories/inMemoryCustomerRepository';
 
-import { CreateCustomerService } from '../CreateCustomerService';
+import { CreateCustomerService } from '../../../../src/domain/services/customer/CreateCustomerService';
 
 describe.skip('Create an customer', () => {
   it('should create an customer', async () => {

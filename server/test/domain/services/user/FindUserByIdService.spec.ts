@@ -1,4 +1,4 @@
-import { InMemoryUserRepository } from '@/test/repositories/inMemoryUserRepository';
+import { InMemoryUserRepository } from '@/test/infra/repositories/inMemoryUserRepository';
 
 import { CreateUserService } from '../CreateUserService';
 import { FindUserByIdService } from '../FindUserByIdService';

@@ -4,8 +4,8 @@ import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
 import { hash } from 'bcrypt';
 import crypto from 'node:crypto';
 
-import { UserRepository } from '../../src/infra/repositories';
-import { CreateUserData } from '../../src/infra/repositories/UserRepository';
+import { UserRepository } from '../../../src/infra/repositories';
+import { CreateUserData } from '../../../src/infra/repositories/UserRepository';
 
 export class InMemoryUserRepository implements UserRepository {
   public items: UserModel[] = [];
