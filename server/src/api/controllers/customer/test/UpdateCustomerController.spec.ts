@@ -3,9 +3,10 @@ import supertest from 'supertest';
 
 describe('Update an customer', () => {
   let customer: supertest.Response;
+  let data = {};
 
   beforeEach(async () => {
-    const data = {
+    data = {
       name: '_anycustomer',
       email: '_any@email.com',
       phoneNumber: '00000000000',
@@ -86,5 +87,29 @@ describe('Update an customer', () => {
     const response = await supertest(app).put(`/customers/${customer.body.id}`).send({});
 
     expect(response.status).toBe(400);
+  });
+
+  it('should return error when customer to update is not found', async () => {
+    const id = '_anycustomerid';
+    data = {
+      name: '_anycustomer',
+      email: '_any@email.com',
+      phoneNumber: '00000000000',
+      cpf: '000.000.000-00',
+      address: {
+        street: '_anystreet, 000',
+        district: '_anydistrict',
+        zipcode: '00000000',
+        city: '_anycity',
+        state: '_anystate',
+      },
+    };
+
+    const response = await supertest(app).put(`/customers/${id}`).send(data);
+
+    expect(response.status).toBe(404);
+    expect(response.body.statusCode).toEqual(404);
+    expect(response.body.method).toEqual('updateCustomer');
+    expect(response.body.message).toEqual(`Customer {${id}} not found`);
   });
 });
