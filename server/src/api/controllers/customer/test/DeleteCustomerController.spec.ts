@@ -1,7 +1,24 @@
 import { app } from '@/src/app';
 import supertest from 'supertest';
 
-describe.skip('Delete an customer', () => {
+describe('Delete an customer', () => {
+  let user: supertest.Response;
+  let token: supertest.Response;
+
+  beforeEach(async () => {
+    user = await supertest(app)
+      .post('/users')
+      .send({ email: '_any@email.com.br', password: '_anypassword' });
+
+    token = await supertest(app)
+      .post('/login')
+      .send({ email: '_any@email.com.br', password: '_anypassword' });
+  });
+
+  afterEach(async () => {
+    await supertest(app).delete(`/users/${user.body.id}`).send();
+  });
+
   it('should delete an customer', async () => {
     const data = {
       name: '_anycustumer',
@@ -15,11 +32,20 @@ describe.skip('Delete an customer', () => {
       state: '_anystate',
     };
 
-    const customer = await supertest(app).post('/customers').send(data);
+    const customer = await supertest(app)
+      .post('/customers')
+      .auth(token.body.token, { type: 'bearer' })
+      .send(data);
 
-    const response = await supertest(app).delete(`/customers/${customer.body.id}`).send();
+    const response = await supertest(app)
+      .delete(`/customers/${customer.body.id}`)
+      .auth(token.body.token, { type: 'bearer' })
+      .send();
 
-    const customerExists = await supertest(app).get(`/customers/${customer.body.id}`).send();
+    const customerExists = await supertest(app)
+      .get(`/customers/${customer.body.id}`)
+      .auth(token.body.token, { type: 'bearer' })
+      .send();
 
     expect(response.status).toBe(200);
     expect(customerExists.body.message).toEqual(`Customer {${customer.body.id}} not found`);
@@ -30,7 +56,10 @@ describe.skip('Delete an customer', () => {
   it('should return error when customer not found', async () => {
     const id = '_anycustomerid';
 
-    const response = await supertest(app).delete(`/customers/${id}`).send();
+    const response = await supertest(app)
+      .delete(`/customers/${id}`)
+      .auth(token.body.token, { type: 'bearer' })
+      .send();
 
     expect(response.status).toBe(404);
     expect(response.body.message).toEqual(`Customer {${id}} not found`);

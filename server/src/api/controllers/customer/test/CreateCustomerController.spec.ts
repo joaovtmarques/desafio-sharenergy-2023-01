@@ -1,7 +1,24 @@
 import { app } from '@/src/app';
 import supertest from 'supertest';
 
-describe.skip('Create an customer', () => {
+describe('Create an customer', () => {
+  let user: supertest.Response;
+  let token: supertest.Response;
+
+  beforeEach(async () => {
+    user = await supertest(app)
+      .post('/users')
+      .send({ email: '_any@email.com.br', password: '_anypassword' });
+
+    token = await supertest(app)
+      .post('/login')
+      .send({ email: '_any@email.com.br', password: '_anypassword' });
+  });
+
+  afterEach(async () => {
+    await supertest(app).delete(`/users/${user.body.id}`).send();
+  });
+
   it('should create an customer', async () => {
     const data = {
       name: '_anycustumer',
@@ -15,7 +32,10 @@ describe.skip('Create an customer', () => {
       state: '_anystate',
     };
 
-    const customer = await supertest(app).post('/customers').send(data);
+    const customer = await supertest(app)
+      .post('/customers')
+      .auth(token.body.token, { type: 'bearer' })
+      .send(data);
 
     expect(customer.status).toBe(201);
     expect(customer.body).toEqual(
@@ -36,10 +56,18 @@ describe.skip('Create an customer', () => {
         }),
       })
     );
+
+    await supertest(app)
+      .delete(`/customers/${customer.body.id}`)
+      .auth(token.body.token, { type: 'bearer' })
+      .send();
   });
 
   it('should return error when data to create customer is not provided', async () => {
-    const customer = await supertest(app).post('/customers').send({});
+    const customer = await supertest(app)
+      .post('/customers')
+      .auth(token.body.token, { type: 'bearer' })
+      .send({});
 
     expect(customer.status).toBe(400);
   });

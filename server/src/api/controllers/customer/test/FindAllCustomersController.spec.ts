@@ -1,9 +1,32 @@
 import supertest from 'supertest';
 import { app } from '@/src/app';
 
-describe.skip('Find all customers', () => {
+describe('Find all customers', () => {
+  let user: supertest.Response;
+  let token: supertest.Response;
+
+  beforeEach(async () => {
+    user = await supertest(app)
+      .post('/users')
+      .send({ email: '_any@email.com.br', password: '_anypassword' });
+
+    token = await supertest(app)
+      .post('/login')
+      .send({ email: '_any@email.com.br', password: '_anypassword' });
+  });
+
+  afterEach(async () => {
+    await supertest(app)
+      .delete(`/users/${user.body.id}`)
+      .auth(token.body.token, { type: 'bearer' })
+      .send();
+  });
+
   it('should find all customers', async () => {
-    const customers = await supertest(app).get('/customers').send({});
+    const customers = await supertest(app)
+      .get('/customers')
+      .auth(token.body.token, { type: 'bearer' })
+      .send({});
 
     expect(customers.body).toEqual(
       expect.arrayContaining([

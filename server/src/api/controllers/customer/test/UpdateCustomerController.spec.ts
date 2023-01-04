@@ -1,11 +1,21 @@
 import { app } from '@/src/app';
 import supertest from 'supertest';
 
-describe.skip('Update an customer', () => {
+describe('Update an customer', () => {
   let customer: supertest.Response;
   let data = {};
+  let user: supertest.Response;
+  let token: supertest.Response;
 
   beforeEach(async () => {
+    user = await supertest(app)
+      .post('/users')
+      .send({ email: '_any@email.com.br', password: '_anypassword' });
+
+    token = await supertest(app)
+      .post('/login')
+      .send({ email: '_any@email.com.br', password: '_anypassword' });
+
     data = {
       name: '_anycustomer',
       email: '_any@email.com',
@@ -18,11 +28,18 @@ describe.skip('Update an customer', () => {
       state: '_anystate',
     };
 
-    customer = await supertest(app).post('/customers').send(data);
+    customer = await supertest(app)
+      .post('/customers')
+      .auth(token.body.token, { type: 'bearer' })
+      .send(data);
   });
 
   afterEach(async () => {
-    await supertest(app).delete(`/customers/${customer.body.id}`).send();
+    await supertest(app)
+      .delete(`/customers/${customer.body.id}`)
+      .auth(token.body.token, { type: 'bearer' })
+      .send();
+    await supertest(app).delete(`/users/${user.body.id}`).send();
   });
 
   it('should update an customer', async () => {
@@ -42,6 +59,7 @@ describe.skip('Update an customer', () => {
 
     const updatedCustomer = await supertest(app)
       .put(`/customers/${customer.body.id}`)
+      .auth(token.body.token, { type: 'bearer' })
       .send(updatedData);
 
     expect(updatedCustomer.body).toEqual(
@@ -84,7 +102,10 @@ describe.skip('Update an customer', () => {
   });
 
   it('should return error when required data is not provided', async () => {
-    const response = await supertest(app).put(`/customers/${customer.body.id}`).send({});
+    const response = await supertest(app)
+      .put(`/customers/${customer.body.id}`)
+      .auth(token.body.token, { type: 'bearer' })
+      .send({});
 
     expect(response.status).toBe(400);
   });
@@ -105,7 +126,10 @@ describe.skip('Update an customer', () => {
       },
     };
 
-    const response = await supertest(app).put(`/customers/${id}`).send(data);
+    const response = await supertest(app)
+      .put(`/customers/${id}`)
+      .auth(token.body.token, { type: 'bearer' })
+      .send(data);
 
     expect(response.status).toBe(404);
     expect(response.body.statusCode).toEqual(404);
