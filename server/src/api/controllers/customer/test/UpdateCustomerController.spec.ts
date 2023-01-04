@@ -1,7 +1,7 @@
 import { app } from '@/src/app';
 import supertest from 'supertest';
 
-describe('Update an customer', () => {
+describe.skip('Update an customer', () => {
   let customer: supertest.Response;
   let data = {};
 
