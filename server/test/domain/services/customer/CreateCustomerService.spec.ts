@@ -1,8 +1,8 @@
 import { InMemoryCustomerRepository } from '@/test/infra/repositories/inMemoryCustomerRepository';
 
-import { CreateCustomerService } from '../../../../src/domain/services/customer/CreateCustomerService';
+import { CreateCustomerService } from '@/src/domain/services/customer/CreateCustomerService';
 
-describe.skip('Create an customer', () => {
+describe('Create an customer', () => {
   it('should create an customer', async () => {
     const inMemoryCustomerRepository = new InMemoryCustomerRepository();
     const createCustomerService = new CreateCustomerService(inMemoryCustomerRepository);

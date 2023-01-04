@@ -1,9 +1,9 @@
 import { InMemoryCustomerRepository } from '@/test/infra/repositories/inMemoryCustomerRepository';
 
-import { CreateCustomerService } from '../CreateCustomerService';
-import { FindCustomerByIdService } from '../FindCustomerByIdService';
+import { CreateCustomerService } from '@/src/domain/services/customer/CreateCustomerService';
+import { FindCustomerByIdService } from '@/src/domain/services/customer/FindCustomerByIdService';
 
-describe.skip('Find customer by id', () => {
+describe('Find customer by id', () => {
   it('should find an customer by id', async () => {
     const inMemoryCustomerRepository = new InMemoryCustomerRepository();
     const createCustomerService = new CreateCustomerService(inMemoryCustomerRepository);

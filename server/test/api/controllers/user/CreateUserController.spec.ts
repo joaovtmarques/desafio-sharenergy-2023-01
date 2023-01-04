@@ -1,7 +1,7 @@
 import { app } from '@/src/app';
 import request from 'supertest';
 
-describe.skip('Create user', () => {
+describe('Create user', () => {
   it('should create an user', async () => {
     const data = {
       email: '_any@email.com',

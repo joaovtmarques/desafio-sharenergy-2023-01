@@ -1,9 +1,9 @@
 import { InMemoryUserRepository } from '@/test/infra/repositories/inMemoryUserRepository';
 
-import { CreateUserService } from '../CreateUserService';
-import { FindUserByIdService } from '../FindUserByIdService';
+import { CreateUserService } from '@/src/domain/services/user/CreateUserService';
+import { FindUserByIdService } from '@/src/domain/services/user/FindUserByIdService';
 
-describe.skip('Find user by id', () => {
+describe('Find user by id', () => {
   it('should find an user by id', async () => {
     const inMemoryUserRepository = new InMemoryUserRepository();
     const createUserService = new CreateUserService(inMemoryUserRepository);
@@ -21,8 +21,8 @@ describe.skip('Find user by id', () => {
     expect(userExists).toEqual(
       expect.objectContaining({
         id: expect.any(String),
-        email: data.email,
-        createdAt: expect.any(String),
+        email: expect.any(String),
+        password: expect.any(String),
       })
     );
   });

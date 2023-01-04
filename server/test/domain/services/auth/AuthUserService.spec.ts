@@ -1,10 +1,10 @@
 import { BaseError } from '@/src/shared/classes/baseError';
 import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
 import { InMemoryUserRepository } from '@/test/infra/repositories/inMemoryUserRepository';
-import { CreateUserService } from '../../../../src/domain/services/user/CreateUserService';
-import { AuthUserService } from '../../../../src/domain/services/auth/AuthUserService';
+import { CreateUserService } from '@/src/domain/services/user/CreateUserService';
+import { AuthUserService } from '@/src/domain/services/auth/AuthUserService';
 
-describe.skip('Authenticate an user', () => {
+describe('Authenticate an user', () => {
   it('should authenticate an user', async () => {
     const inMemoryUserRepository = new InMemoryUserRepository();
     const authUserService = new AuthUserService(inMemoryUserRepository);

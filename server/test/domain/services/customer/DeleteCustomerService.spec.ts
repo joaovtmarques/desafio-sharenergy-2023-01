@@ -2,11 +2,11 @@ import { BaseError } from '@/src/shared/classes/baseError';
 import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
 import { InMemoryCustomerRepository } from '@/test/infra/repositories/inMemoryCustomerRepository';
 
-import { CreateCustomerService } from '../CreateCustomerService';
-import { DeleteCustomerService } from '../DeleteCustomerService';
-import { FindCustomerByIdService } from '../FindCustomerByIdService';
+import { CreateCustomerService } from '@/src/domain/services/customer/CreateCustomerService';
+import { DeleteCustomerService } from '@/src/domain/services/customer/DeleteCustomerService';
+import { FindCustomerByIdService } from '@/src/domain/services/customer/FindCustomerByIdService';
 
-describe.skip('Delete an user', () => {
+describe('Delete an user', () => {
   it('should delete an costumer', async () => {
     const inMemoryCustomerRepository = new InMemoryCustomerRepository();
     const createCustomerService = new CreateCustomerService(inMemoryCustomerRepository);

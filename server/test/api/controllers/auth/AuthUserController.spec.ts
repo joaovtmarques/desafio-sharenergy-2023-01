@@ -1,7 +1,7 @@
 import { app } from '@/src/app';
 import supertest from 'supertest';
 
-describe.skip('Authenticate an user', () => {
+describe('Authenticate an user', () => {
   let user: supertest.Response;
 
   const data = {

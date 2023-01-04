@@ -2,9 +2,9 @@ import { BaseError } from '@/src/shared/classes/baseError';
 import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
 import { InMemoryUserRepository } from '@/test/infra/repositories/inMemoryUserRepository';
 
-import { CreateUserService } from '../CreateUserService';
-import { DeleteUserService } from '../DeleteUserService';
-import { FindUserByIdService } from '../FindUserByIdService';
+import { CreateUserService } from '@/src/domain/services/user/CreateUserService';
+import { DeleteUserService } from '@/src/domain/services/user/DeleteUserService';
+import { FindUserByIdService } from '@/src/domain/services/user/FindUserByIdService';
 
 describe('Delete an user', () => {
   it('should delete an user', async () => {

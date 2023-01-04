@@ -2,10 +2,10 @@ import { BaseError } from '@/src/shared/classes/baseError';
 import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
 import { InMemoryCustomerRepository } from '@/test/infra/repositories/inMemoryCustomerRepository';
 
-import { CreateCustomerService } from '../CreateCustomerService';
-import { UpdateCustomerService } from '../UpdateCustomerService';
+import { CreateCustomerService } from '@/src/domain/services/customer/CreateCustomerService';
+import { UpdateCustomerService } from '@/src/domain/services/customer/UpdateCustomerService';
 
-describe.skip('Update an customer', () => {
+describe('Update an customer', () => {
   it('should update an customer', async () => {
     const inMemoryCustomerRepository = new InMemoryCustomerRepository();
     const updateCustomerService = new UpdateCustomerService(inMemoryCustomerRepository);

@@ -3,7 +3,7 @@ import { app } from '@/src/app';
 import supertest from 'supertest';
 import request, { Response } from 'supertest';
 
-describe.skip('Refresh token user', () => {
+describe('Refresh token user', () => {
   let user: Response;
 
   const data = {
