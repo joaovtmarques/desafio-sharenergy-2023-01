@@ -8,11 +8,11 @@ describe('Delete user', () => {
   beforeEach(async () => {
     userResponse = await supertest(app)
       .post('/users')
-      .send({ email: '_any@email.com.br', password: '_anypassword' });
+      .send({ username: '_any@email.com.br', password: '_anypassword' });
 
     token = await supertest(app)
       .post('/login')
-      .send({ email: '_any@email.com.br', password: '_anypassword' });
+      .send({ username: '_any@email.com.br', password: '_anypassword' });
   });
 
   afterEach(async () => {
@@ -21,7 +21,7 @@ describe('Delete user', () => {
 
   it('should delete an user', async () => {
     const data = {
-      email: '_any@email.com',
+      username: '_any@email.com',
       password: '_anypass',
     };
 

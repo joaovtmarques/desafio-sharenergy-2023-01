@@ -10,7 +10,7 @@ describe('Find user by id', () => {
     const findUserById = new FindUserByIdService(inMemoryUserRepository);
 
     const data = {
-      email: '_any@email.com',
+      username: '_any@email.com',
       password: '_anypassword',
     };
 
@@ -21,7 +21,7 @@ describe('Find user by id', () => {
     expect(userExists).toEqual(
       expect.objectContaining({
         id: expect.any(String),
-        email: expect.any(String),
+        username: expect.any(String),
         password: expect.any(String),
       })
     );

@@ -1,6 +1,7 @@
 import { CustomerModel } from '@/src/domain/models';
 import { CreateCustomerRequest } from '@/src/domain/services/customer/UpdateCustomerService';
 import prismaClient from '@/src/prisma';
+
 import { CreateCustomerData, CustomerRepository } from './../CustomerRepository';
 
 export class PrismaCustomerRepository implements CustomerRepository {

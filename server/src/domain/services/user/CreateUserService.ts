@@ -1,10 +1,9 @@
-import { hash } from 'bcrypt';
-
 import { UserModel } from '@/src/domain/models';
 import { UserRepository } from '@/src/infra/repositories';
+import { hash } from 'bcrypt';
 
 interface CreateUserRequest {
-  email: string;
+  username: string;
   password: string;
 }
 

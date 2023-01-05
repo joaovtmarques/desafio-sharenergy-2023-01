@@ -1,5 +1,5 @@
-import supertest from 'supertest';
 import { app } from '@/src/app';
+import supertest from 'supertest';
 
 describe('Find all customers', () => {
   let user: supertest.Response;
@@ -8,11 +8,11 @@ describe('Find all customers', () => {
   beforeEach(async () => {
     user = await supertest(app)
       .post('/users')
-      .send({ email: '_any@email.com.br', password: '_anypassword' });
+      .send({ username: '_any@email.com.br', password: '_anypassword' });
 
     token = await supertest(app)
       .post('/login')
-      .send({ email: '_any@email.com.br', password: '_anypassword' });
+      .send({ username: '_any@email.com.br', password: '_anypassword' });
   });
 
   afterEach(async () => {

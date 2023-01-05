@@ -11,13 +11,16 @@ describe('Authenticate an user', () => {
     const createUserService = new CreateUserService(inMemoryUserRepository);
 
     const data = {
-      email: '_any@email.com',
+      username: '_any@email.com',
       password: '_anypassword',
     };
 
     await createUserService.execute(data);
 
-    const token = await authUserService.execute({ email: data.email, password: data.password });
+    const token = await authUserService.execute({
+      username: data.username,
+      password: data.password,
+    });
 
     expect(token).toEqual(
       expect.objectContaining({
@@ -32,7 +35,7 @@ describe('Authenticate an user', () => {
 
     const action = async () => {
       await authUserService.execute({
-        email: '_any@email.com',
+        username: '_any@email.com',
         password: '_anypassword',
       });
     };
@@ -48,7 +51,7 @@ describe('Authenticate an user', () => {
     const createUserService = new CreateUserService(inMemoryUserRepository);
 
     const data = {
-      email: '_any@email.com',
+      username: '_any@email.com',
       password: '_anypassword',
     };
 
@@ -56,13 +59,17 @@ describe('Authenticate an user', () => {
 
     const action = async () => {
       await authUserService.execute({
-        email: data.email,
+        username: data.username,
         password: '_wrongpassword',
       });
     };
 
     expect(action()).rejects.toThrow(
-      new BaseError('Incorrect email or password', 'authenticateUser', HttpStatusCode.BAD_REQUEST)
+      new BaseError(
+        'Incorrect username or password',
+        'authenticateUser',
+        HttpStatusCode.BAD_REQUEST
+      )
     );
   });
 });

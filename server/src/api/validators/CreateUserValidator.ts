@@ -1,13 +1,13 @@
 import Joi from 'joi';
 
 interface CreateUserRequest {
-  email: string;
+  username: string;
   password: string;
 }
 
 export const validateCreateUserData = (createUser: CreateUserRequest) => {
   const createUserSchema = Joi.object({
-    email: Joi.string().email().required(),
+    username: Joi.string().required(),
     password: Joi.string().min(8).required(),
   });
 

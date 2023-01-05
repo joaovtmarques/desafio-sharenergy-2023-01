@@ -8,11 +8,11 @@ describe('Find user by id', () => {
   beforeEach(async () => {
     userResponse = await supertest(app)
       .post('/users')
-      .send({ email: '_any@email.com.br', password: '_anypassword' });
+      .send({ username: '_any@email.com.br', password: '_anypassword' });
 
     token = await supertest(app)
       .post('/login')
-      .send({ email: '_any@email.com.br', password: '_anypassword' });
+      .send({ username: '_any@email.com.br', password: '_anypassword' });
   });
 
   afterEach(async () => {
@@ -21,7 +21,7 @@ describe('Find user by id', () => {
 
   it('should find user by id', async () => {
     const data = {
-      email: '_any@email.com',
+      username: '_any@email.com',
       password: '_anypass',
     };
 
@@ -36,7 +36,7 @@ describe('Find user by id', () => {
     expect(user.body).toEqual(
       expect.objectContaining({
         id: expect.any(String),
-        email: '_any@email.com',
+        username: '_any@email.com',
       })
     );
   });

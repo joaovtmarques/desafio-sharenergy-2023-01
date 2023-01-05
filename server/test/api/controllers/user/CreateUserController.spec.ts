@@ -4,7 +4,7 @@ import request from 'supertest';
 describe('Create user', () => {
   it('should create an user', async () => {
     const data = {
-      email: '_any@email.com',
+      username: '_any@email.com',
       password: '_anypass',
     };
 
@@ -14,7 +14,7 @@ describe('Create user', () => {
     expect(response.body).toEqual(
       expect.objectContaining({
         id: expect.any(String),
-        email: '_any@email.com',
+        username: '_any@email.com',
       })
     );
   });

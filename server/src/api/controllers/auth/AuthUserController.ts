@@ -9,9 +9,9 @@ export class AuthUserController {
 
   async handle({ req, res, next }: HttpRequest) {
     try {
-      const { email, password } = req.body;
+      const { username, password } = req.body;
 
-      const token = await this.authUserService.execute({ email, password });
+      const token = await this.authUserService.execute({ username, password });
 
       return res.status(HttpStatusCode.OK).send(token);
     } catch (err) {

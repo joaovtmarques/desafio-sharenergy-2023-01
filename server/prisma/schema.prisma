@@ -9,7 +9,7 @@ datasource db {
 
 model User {
   id           String        @id @default(uuid()) @map("_id")
-  email        String
+  username     String
   password     String
   createdAt    DateTime      @default(now())
   refreshToken RefreshToken?

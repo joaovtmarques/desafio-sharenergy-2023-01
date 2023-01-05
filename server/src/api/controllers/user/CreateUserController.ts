@@ -16,9 +16,9 @@ export class CreateUserController {
       return res.status(HttpStatusCode.BAD_REQUEST).send(valid.error.details);
     }
 
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    const user = await this.createUserService.execute({ email, password });
+    const user = await this.createUserService.execute({ username, password });
 
     return res.status(HttpStatusCode.CREATED).send(user);
   }

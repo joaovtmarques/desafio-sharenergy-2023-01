@@ -8,7 +8,7 @@ describe('Create user', () => {
     const createUserService = new CreateUserService(inMemoryUserRepository);
 
     const data = {
-      email: '_any@email.com',
+      username: '_any@email.com',
       password: '_anypass',
     };
 
@@ -16,7 +16,7 @@ describe('Create user', () => {
 
     expect(user).toEqual(
       expect.objectContaining({
-        email: '_any@email.com',
+        username: '_any@email.com',
       })
     );
 

@@ -15,7 +15,7 @@ export class InMemoryUserRepository implements UserRepository {
 
     const user = {
       id: crypto.randomUUID(),
-      email: data.email,
+      username: data.username,
       password: hashedPassword,
       createdAt: new Date(),
     };
@@ -25,11 +25,11 @@ export class InMemoryUserRepository implements UserRepository {
     return user;
   }
 
-  async findByEmail(email: string): Promise<UserModel> {
+  async findByEmail(username: string): Promise<UserModel> {
     let user = null;
 
     this.items.forEach((item) => {
-      if (item.email === email) {
+      if (item.username === username) {
         user = item;
       }
     });

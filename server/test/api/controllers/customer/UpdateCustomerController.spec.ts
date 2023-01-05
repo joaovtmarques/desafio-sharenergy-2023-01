@@ -10,11 +10,11 @@ describe('Update an customer', () => {
   beforeEach(async () => {
     user = await supertest(app)
       .post('/users')
-      .send({ email: '_any@email.com.br', password: '_anypassword' });
+      .send({ username: '_any@email.com.br', password: '_anypassword' });
 
     token = await supertest(app)
       .post('/login')
-      .send({ email: '_any@email.com.br', password: '_anypassword' });
+      .send({ username: '_any@email.com.br', password: '_anypassword' });
 
     data = {
       name: '_anycustomer',

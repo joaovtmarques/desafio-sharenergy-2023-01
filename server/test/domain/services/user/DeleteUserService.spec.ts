@@ -14,7 +14,7 @@ describe('Delete an user', () => {
     const findUserById = new FindUserByIdService(inMemoryUserRepository);
 
     const data = {
-      email: '_any@email.com',
+      username: '_any@email.com',
       password: '_anypassword',
     };
 

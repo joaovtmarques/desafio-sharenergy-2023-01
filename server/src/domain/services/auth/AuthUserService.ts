@@ -6,7 +6,7 @@ import { HttpStatusCode } from '@/src/shared/types/httpStatusCode';
 import { GenerateToken, GenerateRefreshToken } from '@/src/domain/provider';
 
 interface AuthRequest {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -15,11 +15,11 @@ export class AuthUserService {
   constructor(private userRepository: UserRepository) {}
 
   async execute(data: AuthRequest) {
-    const userExists = await this.userRepository.findByEmail(data.email);
+    const userExists = await this.userRepository.findByEmail(data.username);
 
     if (!userExists) {
       throw new BaseError(
-        'Incorrect email or password',
+        'Incorrect username or password',
         'authenticateUser',
         HttpStatusCode.BAD_REQUEST
       );
@@ -27,7 +27,7 @@ export class AuthUserService {
 
     if (!(await compare(data.password, userExists.password))) {
       throw new BaseError(
-        'Incorrect email or password',
+        'Incorrect username or password',
         'authenticateUser',
         HttpStatusCode.BAD_REQUEST
       );

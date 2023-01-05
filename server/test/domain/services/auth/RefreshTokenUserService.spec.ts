@@ -12,13 +12,16 @@ describe('Refresh token user', () => {
     const createUserService = new CreateUserService(inMemoryUserRepository);
 
     const data = {
-      email: '_any@email.com',
+      username: '_any@email.com',
       password: '_anypassword',
     };
 
     await createUserService.execute(data);
 
-    const token = await authUserService.execute({ email: data.email, password: data.password });
+    const token = await authUserService.execute({
+      username: data.username,
+      password: data.password,
+    });
 
     expect(token).toEqual(
       expect.objectContaining({
@@ -35,13 +38,16 @@ describe('Refresh token user', () => {
     const refreshTokenService = new RefreshTokenUserService(inMemoryUserRepository);
 
     const data = {
-      email: '_any@email.com',
+      username: '_any@email.com',
       password: '_anypassword',
     };
 
     await createUserService.execute(data);
 
-    const token = await authUserService.execute({ email: data.email, password: data.password });
+    const token = await authUserService.execute({
+      username: data.username,
+      password: data.password,
+    });
 
     expect(token).toEqual(
       expect.objectContaining({

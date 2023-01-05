@@ -7,7 +7,7 @@ describe('Refresh token user', () => {
   let user: Response;
 
   const data = {
-    email: '_any@email.com',
+    username: '_any@email.com',
     password: '_anypass',
   };
 
