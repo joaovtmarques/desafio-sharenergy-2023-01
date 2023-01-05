@@ -1,9 +1,10 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
+import cors from 'cors';
 
 import { EnsureAutheticatedMiddleware } from './api/middlewares/EnsureAuthenticatedMiddleware';
 import { ErrorMiddleware } from './api/middlewares/ErrorMiddleware';
-import { auth, user, customer } from './api/routes';
+import { auth, customer, user } from './api/routes';
 import { swaggerDocs } from './utils/swagger';
 
 dotenv.config();
@@ -19,5 +20,6 @@ app.use(customer);
 
 app.use(ErrorMiddleware);
 app.use(EnsureAutheticatedMiddleware);
+app.use(cors());
 
 export { app };
