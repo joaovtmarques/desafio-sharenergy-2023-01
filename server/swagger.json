@@ -595,7 +595,7 @@
                   "findOneUser": {
                     "value": {
                       "id": "9fa2df1c-8c67-4bf7-8802-8e0ed47f3dca",
-                      "email": "_any@email.com",
+                      "username": "_anyusername",
                       "password": "$2b$08$PxAkcnF/EvAbEszzefdDzOxRCUlk/1LrzTlrJZTM17U9r1pvo1wC6",
                       "createdAt": "2023-01-05T01:46:11.003Z"
                     }
@@ -782,7 +782,7 @@
                     "value": {
                       "statusCode": 400,
                       "method": "authenticateUser",
-                      "message": "Incorrect email or password"
+                      "message": "Incorrect username or password"
                     }
                   }
                 }
@@ -938,7 +938,7 @@
       "CreateUser": {
         "type": "object",
         "properties": {
-          "email": { "type": "string" },
+          "username": { "type": "string" },
           "password": { "type": "string" }
         }
       },
@@ -946,7 +946,7 @@
         "type": "object",
         "properties": {
           "id": { "type": "string" },
-          "email": { "type": "string" },
+          "username": { "type": "string" },
           "password": { "type": "string" },
           "createdAt": { "type": "string" }
         }
