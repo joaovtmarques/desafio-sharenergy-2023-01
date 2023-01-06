@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client';
 
 import './styles/main.css';
 
-import { SignUp } from './pages';
+import { AppRoutes } from './routes';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
 		<div className="h-screen w-screen">
-			<SignUp />
+			<AppRoutes />
 		</div>
 	</React.StrictMode>,
 );
