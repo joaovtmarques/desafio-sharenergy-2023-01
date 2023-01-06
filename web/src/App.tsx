@@ -1,5 +1,3 @@
-import './styles/main.css';
-
 export function App() {
 	return (
 		<div className="h-screen bg-slate-500 flex items-center justify-center">
