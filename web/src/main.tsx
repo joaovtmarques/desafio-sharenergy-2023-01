@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client';
 
 import './styles/main.css';
 
-import { Login } from './pages/Login';
+import { SignUp } from './pages';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
 		<div className="h-screen w-screen">
-			<Login />
+			<SignUp />
 		</div>
 	</React.StrictMode>,
 );
