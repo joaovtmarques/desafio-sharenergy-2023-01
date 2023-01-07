@@ -4,6 +4,7 @@ import { Button } from './Button';
 import { UserCard } from './UserCard';
 import { Container } from './Container';
 import { TextInput } from './TextInput';
+import { BottomTabs } from './BottomTabs';
 import { LogoutButton } from './LogoutButton';
 import { NextPrevButton } from './NextPrevButton';
 
@@ -14,6 +15,7 @@ export {
 	UserCard,
 	TextInput,
 	Container,
+	BottomTabs,
 	LogoutButton,
 	NextPrevButton,
 };
