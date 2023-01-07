@@ -1,21 +1,31 @@
 import { EyeSlash, Eye } from 'phosphor-react';
 import { useState, InputHTMLAttributes } from 'react';
 
-interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface TextInputProps extends InputHTMLAttributes<HTMLDivElement> {
 	icon?: JSX.Element;
 	type: string;
+	placeholder?: string;
+	noMargin?: boolean;
 }
 
-export function TextInput({ icon, type, ...props }: TextInputProps) {
+export function TextInput({
+	icon,
+	type,
+	placeholder,
+	noMargin,
+	...props
+}: TextInputProps) {
 	const [hidden, setHidden] = useState(true);
 
 	return (
 		<div
-			{...props}
-			className="w-full h-16 flex my-8 bg-black2 rounded-xl overflow-hidden focus-within:border-brandPink border-2 border-solid">
+			className={`w-full h-16 flex ${
+				noMargin ? 'my-0' : 'my-8'
+			} bg-black2 rounded-xl overflow-hidden focus-within:border-brandPink border-2 border-solid`}>
 			<input
-				type={type === 'password' && hidden ? type : 'text'}
-				className="flex-1 w-full outline-none px-8 bg-black2 text-gray1 text-base font-regular focus:text-white"
+				type={type === 'password' && hidden ? type : type}
+				placeholder={placeholder}
+				className="flex-1 w-full outline-none px-8 bg-black2 text-gray1 text-xs md:text-base lg:text-base font-regular focus:text-white"
 			/>
 			{type === 'password' && icon !== null ? (
 				<div
@@ -28,7 +38,11 @@ export function TextInput({ icon, type, ...props }: TextInputProps) {
 					)}
 				</div>
 			) : (
-				<div className="flex items-center justify-center px-4">{icon}</div>
+				<div
+					{...props}
+					className="flex items-center justify-center px-4 cursor-pointer">
+					{icon}
+				</div>
 			)}
 		</div>
 	);

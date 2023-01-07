@@ -1,0 +1,28 @@
+interface UserCardProps {
+	avatar: string;
+	name: string;
+	username: string;
+	age: string;
+	email: string;
+}
+
+export function UserCard() {
+	return (
+		<div className="w-full px-16 py-10 md:w-72 md:h-64 lg:w-72 lg:h-64 mb-8 bg-black2 rounded-xl flex flex-col justify-center items-center cursor-pointer hover:opacity-90">
+			<img
+				src="https://avatars.githubusercontent.com/u/74778269?v=4"
+				alt="Avatar"
+				className="h-16  w-16 md:h-22 md:w-22 lg:h-24 lg:w-24 rounded-full"
+			/>
+			<p className="text-sm md:text-base lg:text-base text-center text-white font-medium pt-2">
+				João Vitor Marques
+			</p>
+			<p className="text-xs md:text-sm lg:text-sm text-center text-gray1 font-regular pt-1">
+				joaovtmarques -<span> 18</span>
+			</p>
+			<p className="text-xs md:text-sm lg:text-sm text-center text-brandPurple font-regular pt-1">
+				jvsilvam@outlook.com
+			</p>
+		</div>
+	);
+}
