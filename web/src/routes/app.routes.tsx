@@ -1,20 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { AuthRoutes } from './auth.routes';
-import { Cat, Customer, Dog, Home, Login, SignUp } from '@/pages';
+import { Cat, Customer, Dog, Home, Login, NotFound, SignUp } from '@/pages';
 
 export function AppRoutes() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route
-					path="*"
-					element={
-						<AuthRoutes>
-							<Home />
-						</AuthRoutes>
-					}
-				/>
+				<Route path="*" element={<NotFound />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<SignUp />} />
 				<Route path="/register" element={<SignUp />} />
