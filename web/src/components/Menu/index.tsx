@@ -29,8 +29,8 @@ export function Menu({ route, ...props }: MenuProps) {
 				return (
 					<div
 						key={key}
-						className={`text-sm lg:text-base ${
-							route === item.route ? 'text-brandPink' : 'text-white'
+						className={`text-sm lg:text-base bg-opacity-0 ${
+							route === item.route ? 'text-brandPurple' : 'text-white'
 						} font-medium cursor-pointer md:mx-5 lg:mx-8 hover:opacity-80`}
 						onClick={() => navigate(item.route)}>
 						{item.title}

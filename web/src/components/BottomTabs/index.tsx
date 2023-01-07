@@ -16,7 +16,7 @@ export function BottomTabs({ route, ...props }: BottomTabsProps) {
 				<House
 					className={
 						route === '/' || route === '/home' || route === '/*'
-							? 'text-brandPink'
+							? 'text-brandPink '
 							: 'text-white'
 					}
 					size={20}

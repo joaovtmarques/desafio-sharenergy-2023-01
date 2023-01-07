@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
 	content: [
 		'./index.html',
@@ -16,6 +17,7 @@ module.exports = {
 					'linear-gradient(18.66deg, #6E28E050 6.55%, #EB2F9350 98.12%)',
 				'gradient/20':
 					'linear-gradient(18.66deg, #6E28E020 6.55%, #EB2F9320 98.12%)',
+				border: 'linear-gradient(18.66deg, #6E28E0 6.55%, #EB2F93 98.12%)',
 			},
 			boxShadow: {
 				button: '0px 0px 55px rgba(113, 45, 224, 0.45)',
