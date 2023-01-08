@@ -8,6 +8,8 @@ import { BottomTabs } from './BottomTabs';
 import { LogoutButton } from './LogoutButton';
 import { NextPrevButton } from './NextPrevButton';
 import { CustomerItem } from './CustomerCard';
+import { CustomerForm } from './CustomerForm';
+import { CustomerFormButton } from './CustomerFormButton';
 
 export {
 	Menu,
@@ -18,5 +20,8 @@ export {
 	Container,
 	BottomTabs,
 	LogoutButton,
+	CustomerItem,
+	CustomerForm,
 	NextPrevButton,
+	CustomerFormButton,
 };
