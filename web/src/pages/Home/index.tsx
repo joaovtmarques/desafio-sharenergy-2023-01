@@ -53,7 +53,7 @@ export function Home() {
 							<NextPrevButton type="next" />
 						</div>
 					</div>
-					<div className="mt-12 md:mt-20 lg:mt-20 w-full flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap items-center justify-center md:gap-x-8 lg:gap-x-8">
+					<div className="mt-12 md:mt-20 lg:mt-20 w-full flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap items-center justify-center md:gap-x-6 lg:gap-x-6">
 						{arr.map((item, key) => {
 							return <UserCard key={key} />;
 						})}
