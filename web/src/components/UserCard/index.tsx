@@ -8,7 +8,7 @@ interface UserCardProps {
 
 export function UserCard() {
 	return (
-		<div className="w-full px-16 py-10 md:w-72 md:h-64 lg:w-72 lg:h-64 mb-8 bg-black2 rounded-xl flex flex-col justify-center items-center cursor-pointer hover:opacity-90">
+		<div className="w-full px-16 py-10 md:w-72 md:h-64 lg:w-72 lg:h-64 mb-6 bg-black2 rounded-xl flex flex-col justify-center items-center cursor-pointer hover:opacity-90">
 			<img
 				src="https://avatars.githubusercontent.com/u/74778269?v=4"
 				alt="Avatar"

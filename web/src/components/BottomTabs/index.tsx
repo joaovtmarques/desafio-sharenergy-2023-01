@@ -1,6 +1,6 @@
+import { Cat, Dog, House, Person } from 'phosphor-react';
 import { HTMLAttributes } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Dog, Cat, Person, House } from 'phosphor-react';
 
 interface BottomTabsProps extends HTMLAttributes<HTMLDivElement> {
 	route?: string;
@@ -53,7 +53,7 @@ export function BottomTabs({ route, ...props }: BottomTabsProps) {
 	];
 
 	return (
-		<div className="w-full py-4 flex md:hidden lg:hidden items-center justify-center bg-black2 rounded-t-xl fixed bottom-0">
+		<div className="w-full py-4 flex md:hidden lg:hidden items-center justify-center bg-black3 rounded-t-xl fixed bottom-0">
 			{options.map((item, key) => {
 				return (
 					<div

@@ -7,6 +7,7 @@ import { TextInput } from './TextInput';
 import { BottomTabs } from './BottomTabs';
 import { LogoutButton } from './LogoutButton';
 import { NextPrevButton } from './NextPrevButton';
+import { CustomerItem } from './CustomerCard';
 
 export {
 	Menu,
