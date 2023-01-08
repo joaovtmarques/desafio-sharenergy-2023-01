@@ -6,8 +6,11 @@ import { Button, Header, Container, TextInput } from '@/components';
 
 import logoImg from '@/assets/logo.svg';
 import phoneImg from '@/assets/phone.svg';
+import { useNavigate } from 'react-router-dom';
 
 export function SignUp() {
+	const navigate = useNavigate();
+
 	const [rememberMe, setRememberMe] = useState(false);
 
 	const [password, setPassword] = useState('');
@@ -39,9 +42,11 @@ export function SignUp() {
 						<div className="flex z-20 absolute top-0 left-0">
 							<p className="text-gray1 text-sm font-regular mt-20">
 								Já possui uma conta? Faça login para entrar{' '}
-								<a href="" className="text-brandPurple">
+								<span
+									onClick={() => navigate('/login')}
+									className="text-brandPurple cursor-pointer hover:opacity-90">
 									Aqui!
-								</a>{' '}
+								</span>{' '}
 							</p>
 							<img src={phoneImg} alt="Celular" className="ml-[-30px]" />
 						</div>
@@ -52,13 +57,15 @@ export function SignUp() {
 						Cadastre-se
 					</p>
 					<div className="w-full">
-						<TextInput type="text" />
+						<TextInput type="text" placeholder="Endereço de e-mail" />
 						<TextInput
 							type="password"
+							placeholder="Senha"
 							onChange={e => setPassword(e.target.value)}
 						/>
 						<TextInput
 							type="password"
+							placeholder="Confirme sua senha"
 							onChange={e => setConfirmPassword(e.target.value)}
 						/>
 					</div>
@@ -84,9 +91,11 @@ export function SignUp() {
 					<div className="lg:hidden w-full px-8 flex items-center justify-center text-center">
 						<p className="text-gray1 text-xs font-regular mt-20">
 							Já possui uma conta? Faça login para entrar{' '}
-							<a href="" className="text-brandPurple">
+							<span
+								onClick={() => navigate('/login')}
+								className="text-brandPurple cursor-pointer hover:opacity-90">
 								Aqui!
-							</a>{' '}
+							</span>{' '}
 						</p>
 					</div>
 				</div>

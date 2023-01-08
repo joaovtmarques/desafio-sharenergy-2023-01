@@ -6,8 +6,11 @@ import { Button, Header, Container, TextInput } from '@/components';
 
 import logoImg from '@/assets/logo.svg';
 import phoneImg from '@/assets/phone.svg';
+import { useNavigate } from 'react-router-dom';
 
 export function Login() {
+	const navigate = useNavigate();
+
 	const [rememberMe, setRememberMe] = useState(false);
 
 	return (
@@ -32,9 +35,11 @@ export function Login() {
 						<div className="flex z-20 absolute top-0 left-0">
 							<p className="text-gray1 text-sm font-regular mt-20">
 								Não possui uma conta ainda? Não tem problema,{' '}
-								<a href="" className="text-brandPurple">
+								<span
+									onClick={() => navigate('/register')}
+									className="text-brandPurple cursor-pointer hover:opacity-90">
 									Cadastre-se Aqui!
-								</a>{' '}
+								</span>{' '}
 							</p>
 							<img src={phoneImg} alt="Celular" className="ml-[-30px]" />
 						</div>
@@ -45,8 +50,8 @@ export function Login() {
 						Login
 					</p>
 					<div className="w-full">
-						<TextInput type="text" />
-						<TextInput type="password" />
+						<TextInput type="text" placeholder="Endereço de e-mail" />
+						<TextInput type="password" placeholder="Senha" />
 					</div>
 					<div className="w-full flex items-center mb-16">
 						<Checkbox.Root
@@ -70,9 +75,11 @@ export function Login() {
 					<div className="lg:hidden w-full px-8 flex items-center justify-center text-center">
 						<p className="text-gray1 text-xs font-regular mt-20">
 							Não possui uma conta ainda? Não tem problema,{' '}
-							<a href="" className="text-brandPurple">
+							<span
+								onClick={() => navigate('/register')}
+								className="text-brandPurple cursor-pointer hover:opacity-90">
 								Cadastre-se Aqui!
-							</a>{' '}
+							</span>{' '}
 						</p>
 					</div>
 				</div>
