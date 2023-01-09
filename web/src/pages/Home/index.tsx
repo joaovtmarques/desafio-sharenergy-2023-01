@@ -13,8 +13,10 @@ import {
 } from '@/components';
 
 import logoImg from '@/assets/logo.svg';
+import { useAuth } from '@/hooks/useAuth';
 
 export function Home() {
+	const auth = useAuth();
 	const location = useLocation();
 	const navigate = useNavigate();
 
@@ -26,7 +28,7 @@ export function Home() {
 				<Header menu>
 					<img src={logoImg} alt="Logo" />
 					<Menu route={location.pathname} />
-					<LogoutButton onClick={() => navigate('/login')} />
+					<LogoutButton onClick={() => auth.logout()} />
 				</Header>
 				<div className="flex-1 pb-8">
 					<div className="w-full flex flex-col md:flex-row lg:flex-row items-center">

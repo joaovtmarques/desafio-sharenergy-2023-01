@@ -1,7 +1,8 @@
 import { EyeSlash, Eye } from 'phosphor-react';
-import { useState, InputHTMLAttributes } from 'react';
+import { useState, InputHTMLAttributes, HTMLAttributes } from 'react';
 
-interface TextInputProps extends InputHTMLAttributes<HTMLDivElement> {
+interface TextInputProps
+	extends HTMLAttributes<HTMLDivElement | HTMLInputElement> {
 	icon?: JSX.Element;
 	type: string;
 	placeholder?: string;
@@ -29,7 +30,14 @@ export function TextInput({
 				noMargin ? 'my-0' : 'my-8'
 			} bg-black2 rounded-xl overflow-hidden focus-within:border-brandPink border-2 border-solid`}>
 			<input
-				type={type === 'password' && hidden ? type : type}
+				{...props}
+				type={
+					type === 'password' && hidden
+						? type
+						: type === 'password' && !hidden
+						? 'text'
+						: type
+				}
 				placeholder={placeholder}
 				className={`
 				flex-1 w-full outline-none px-8 bg-black2 text-gray1 ${

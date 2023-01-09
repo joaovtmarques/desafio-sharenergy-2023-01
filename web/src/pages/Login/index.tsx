@@ -1,5 +1,5 @@
 import { Check } from 'phosphor-react';
-import { useEffect, useState } from 'react';
+import { HTMLInputTypeAttribute, useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import * as Checkbox from '@radix-ui/react-checkbox';
 
@@ -9,21 +9,36 @@ import { Button, Header, Container, TextInput } from '@/components';
 
 import logoImg from '@/assets/logo.svg';
 import phoneImg from '@/assets/phone.svg';
+import { api } from '@/services/api';
 
 export function Login() {
 	const auth = useAuth();
-
 	const navigate = useNavigate();
 
 	const [rememberMe, setRememberMe] = useState(false);
+	const [username, setUsername] = useState();
+	const [password, setPassword] = useState();
 
-	async function handleRedirect() {
-		if (auth.token) navigate('/');
+	function handleRedirect() {
+		if (auth.token) {
+			navigate('/');
+		}
+	}
+
+	async function handleLogin() {
+		try {
+			if (username && password) {
+				await auth.authenticate(username, password, rememberMe);
+				handleRedirect();
+			}
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	useEffect(() => {
 		handleRedirect();
-	});
+	}, [auth.token]);
 
 	return (
 		<Container>
@@ -62,8 +77,16 @@ export function Login() {
 						Login
 					</p>
 					<div className="w-full">
-						<TextInput type="text" placeholder="Endereço de e-mail" />
-						<TextInput type="password" placeholder="Senha" />
+						<TextInput
+							type="text"
+							placeholder="Endereço de e-mail ou username"
+							onChange={(e: any) => setUsername(e.target.value)}
+						/>
+						<TextInput
+							type="password"
+							placeholder="Senha"
+							onChange={(e: any) => setPassword(e.target.value)}
+						/>
 					</div>
 					<div className="w-full flex items-center mb-16">
 						<Checkbox.Root
@@ -83,7 +106,7 @@ export function Login() {
 							Lembrar de mim?
 						</p>
 					</div>
-					<Button text="Entrar" shadow />
+					<Button text="Entrar" shadow onClick={() => handleLogin()} />
 					<div className="lg:hidden w-full px-8 flex items-center justify-center text-center">
 						<p className="text-gray1 text-xs font-regular mt-20">
 							Não possui uma conta ainda? Não tem problema,{' '}

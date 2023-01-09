@@ -14,12 +14,13 @@ app.use(express.json());
 
 swaggerDocs(app);
 
+app.use(cors());
+
 app.use(auth);
 app.use(user);
 app.use(customer);
 
 app.use(ErrorMiddleware);
 app.use(EnsureAutheticatedMiddleware);
-app.use(cors());
 
 export { app };

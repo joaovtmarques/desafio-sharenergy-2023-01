@@ -1,12 +1,11 @@
-import { Auth } from '@/types';
-import { api } from '@/services/api';
+import { useApi } from '@/hooks/useApi';
 
 export function setAuthLocalStorage(refreshToken: string | null) {
-	localStorage.setItem('token', JSON.stringify(refreshToken));
+	localStorage.setItem('refreshToken', JSON.stringify(refreshToken));
 }
 
 export function getAuthLocalStorage() {
-	const json = localStorage.getItem('token');
+	const json = localStorage.getItem('refreshToken');
 
 	if (!json) return null;
 
@@ -15,11 +14,9 @@ export function getAuthLocalStorage() {
 	return auth ?? null;
 }
 
-export async function LoginRequest(email: string, password: string) {
+export async function LoginRequest(username: string, password: string) {
 	try {
-		const request = await api.post('/login', { email, password });
-
-		return request.data;
+		return useApi().login(username, password);
 	} catch (err) {
 		return null;
 	}
@@ -27,11 +24,7 @@ export async function LoginRequest(email: string, password: string) {
 
 export async function RefreshToken(refreshToken: string) {
 	try {
-		const request = await api.post('/refresh-token', {
-			refreshToken: refreshToken,
-		});
-
-		return request.data;
+		return useApi().refreshToken(refreshToken);
 	} catch (err) {
 		return null;
 	}
