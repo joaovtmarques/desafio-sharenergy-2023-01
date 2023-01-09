@@ -5,6 +5,7 @@ import {
 	getAuthLocalStorage,
 	LoginRequest,
 	RefreshToken,
+	RegisterRequest,
 	setAuthLocalStorage,
 } from '@/utils/auth';
 
@@ -22,6 +23,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 	useEffect(() => {
 		generate();
 	}, [rToken]);
+
+	async function register(
+		username: string,
+		password: string,
+		rememberMe: boolean,
+	) {
+		await RegisterRequest(username, password);
+
+		authenticate(username, password, rememberMe);
+	}
 
 	async function authenticate(
 		username: string,
@@ -66,6 +77,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 			value={{
 				...auth,
 				authenticate,
+				register,
 				logout,
 				refreshToken,
 				getAuthLocalStorage,

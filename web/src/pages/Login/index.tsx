@@ -32,7 +32,7 @@ export function Login() {
 				handleRedirect();
 			}
 		} catch (err) {
-			console.log(err);
+			alert('Username/e-mail ou senha incorretos!');
 		}
 	}
 

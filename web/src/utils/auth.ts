@@ -22,6 +22,14 @@ export async function LoginRequest(username: string, password: string) {
 	}
 }
 
+export async function RegisterRequest(username: string, password: string) {
+	try {
+		return useApi().register(username, password);
+	} catch (err) {
+		return null;
+	}
+}
+
 export async function RefreshToken(refreshToken: string) {
 	try {
 		return useApi().refreshToken(refreshToken);
