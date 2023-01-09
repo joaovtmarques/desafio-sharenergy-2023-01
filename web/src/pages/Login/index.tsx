@@ -1,17 +1,29 @@
-import { useState } from 'react';
 import { Check } from 'phosphor-react';
+import { useEffect, useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import * as Checkbox from '@radix-ui/react-checkbox';
+
+import { useAuth } from '@/hooks/useAuth';
 
 import { Button, Header, Container, TextInput } from '@/components';
 
 import logoImg from '@/assets/logo.svg';
 import phoneImg from '@/assets/phone.svg';
-import { useNavigate } from 'react-router-dom';
 
 export function Login() {
+	const auth = useAuth();
+
 	const navigate = useNavigate();
 
 	const [rememberMe, setRememberMe] = useState(false);
+
+	async function handleRedirect() {
+		if (auth.token) navigate('/');
+	}
+
+	useEffect(() => {
+		handleRedirect();
+	});
 
 	return (
 		<Container>

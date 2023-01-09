@@ -1,3 +1,4 @@
+import { useAuth } from '@/hooks/useAuth';
 import { Navigate } from 'react-router-dom';
 
 interface AuthRoutesProps {
@@ -5,7 +6,7 @@ interface AuthRoutesProps {
 }
 
 export function AuthRoutes({ children }: AuthRoutesProps) {
-	const user = true;
+	const auth = useAuth();
 
-	return user ? children : <Navigate to="/login" />;
+	return auth.token ? children : <Navigate to="/login" />;
 }
