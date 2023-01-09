@@ -1,5 +1,9 @@
+import { useState, useEffect } from 'react';
 import { MagnifyingGlass } from 'phosphor-react';
 import { useLocation, useNavigate } from 'react-router-dom';
+
+import { useAuth } from '@/hooks/useAuth';
+import { useApi } from '@/hooks/useApi';
 
 import {
 	BottomTabs,
@@ -11,16 +15,68 @@ import {
 	TextInput,
 	UserCard,
 } from '@/components';
+import { UserCardProps } from '@/components/UserCard';
 
 import logoImg from '@/assets/logo.svg';
-import { useAuth } from '@/hooks/useAuth';
 
 export function Home() {
 	const auth = useAuth();
 	const location = useLocation();
-	const navigate = useNavigate();
 
-	const arr = [1, 2, 3, 4, 5];
+	const [filter, setFilter] = useState();
+	const [users, setUsers] = useState<any[]>([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [usersPerPage, setUsersPerPage] = useState(8);
+
+	const lastUserIndex = currentPage * usersPerPage;
+	const firstUserIndex = lastUserIndex - usersPerPage;
+	const currentUsers = users.slice(firstUserIndex, lastUserIndex);
+
+	function handleFilter(filter: string) {
+		if (filter !== '') {
+			var filteredUsers = [];
+
+			filteredUsers = users.filter(
+				user =>
+					user.email.includes(filter) ||
+					user.login.username.includes(filter) ||
+					user.name.first.includes(filter) ||
+					user.name.last.includes(filter),
+			);
+
+			if (filteredUsers.length === 0) setUsers([]);
+
+			setUsers(filteredUsers);
+		} else {
+			handleUsersPerPage(currentPage, usersPerPage);
+		}
+	}
+
+	function handleCurrentPage(type: string) {
+		if (type === 'prev') {
+			if (currentPage === 1) alert('Você já está na primeira página!');
+
+			setCurrentPage(currentPage - 1);
+		} else {
+			setCurrentPage(currentPage + 1);
+		}
+	}
+
+	async function handleUsersPerPage(currentPage: number, usersPerPage: number) {
+		const usersList = await useApi().listUsers({
+			page: currentPage,
+			perPage: usersPerPage,
+		});
+		setUsers(usersList.results);
+	}
+
+	useEffect(() => {
+		handleUsersPerPage(currentPage, usersPerPage);
+	}, [currentPage, usersPerPage]);
+
+	useEffect(() => {
+		handleFilter(filter!);
+	}, [filter]);
 
 	return (
 		<>
@@ -39,7 +95,7 @@ export function Home() {
 									placeholder="Procure um usuário por nome, email ou username"
 									noMargin
 									icon={<MagnifyingGlass className="text-gray1" size={22} />}
-									onClick={() => console.log('oi')}
+									onChange={(e: any) => setFilter(e.target.value)}
 								/>
 							</div>
 							<div className="w-full md:w-[30%] lg:w-[30%]">
@@ -47,22 +103,48 @@ export function Home() {
 									type="number"
 									placeholder="Usuários por página"
 									noMargin
+									onChange={(e: any) => setUsersPerPage(e.target.value)}
 								/>
 							</div>
 						</div>
 						<div className="hidden md:flex lg:flex items-center justify-center mt-8 md:mt-0 lg:mt-0">
-							<NextPrevButton type="prev" noMargin />
-							<NextPrevButton type="next" />
+							<NextPrevButton
+								type="prev"
+								noMargin
+								onClick={() => handleCurrentPage('prev')}
+							/>
+
+							<NextPrevButton
+								type="next"
+								onClick={() => handleCurrentPage('next')}
+							/>
 						</div>
 					</div>
 					<div className="mt-12 md:mt-20 lg:mt-20 w-full flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap items-center justify-center md:gap-x-6 lg:gap-x-6">
-						{arr.map((item, key) => {
-							return <UserCard key={key} />;
+						{users.map((item: UserCardProps, key) => {
+							return (
+								<UserCard
+									key={key}
+									dob={item.dob}
+									picture={item.picture}
+									email={item.email}
+									login={item.login}
+									name={item.name}
+								/>
+							);
 						})}
 					</div>
 					<div className="flex md:hidden lg:hidden items-center justify-center mt-8 md:mt-0 lg:mt-0">
-						<NextPrevButton type="prev" noMargin />
-						<NextPrevButton type="next" />
+						<NextPrevButton
+							type="prev"
+							noMargin
+							onClick={() => handleCurrentPage('prev')}
+						/>
+
+						<NextPrevButton
+							type="next"
+							onClick={() => handleCurrentPage('next')}
+						/>
 					</div>
 				</div>
 			</Container>
