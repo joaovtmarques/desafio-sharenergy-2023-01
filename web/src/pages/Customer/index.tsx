@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { useApi, useAuth } from '@/hooks';
+
+import { CustomerProps } from '@/types/Customer';
+
 import {
 	BottomTabs,
 	Container,
@@ -14,9 +18,6 @@ import {
 } from '@/components';
 
 import logoImg from '@/assets/logo.svg';
-import { useApi } from '@/hooks/useApi';
-import { CustomerProps } from '@/types/Customer';
-import { useAuth } from '@/hooks/useAuth';
 
 export function Customer() {
 	const api = useApi();

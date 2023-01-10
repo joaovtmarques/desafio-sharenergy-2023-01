@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useApi } from '@/hooks/useApi';
-import { useAuth } from '@/hooks/useAuth';
+import { useApi, useAuth } from '@/hooks';
 
 import {
 	BottomTabs,

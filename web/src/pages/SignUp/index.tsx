@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Checkbox from '@radix-ui/react-checkbox';
 
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/hooks';
+
 import { Button, Header, Container, TextInput } from '@/components';
 
 import logoImg from '@/assets/logo.svg';

@@ -1,4 +1,4 @@
-import { useApi } from '@/hooks/useApi';
+import { useApi } from '@/hooks';
 
 export function setAuthLocalStorage(refreshToken: string | null) {
 	localStorage.setItem('refreshToken', JSON.stringify(refreshToken));

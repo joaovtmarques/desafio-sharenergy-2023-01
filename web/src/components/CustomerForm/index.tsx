@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form';
 import * as Dialog from '@radix-ui/react-dialog';
 
-import { useApi } from '@/hooks/useApi';
-import { useAuth } from '@/hooks/useAuth';
+import { useApi, useAuth } from '@/hooks';
+
+import { createCustomer, updateCustomer } from '@/utils/customer';
 
 import { CustomerProps } from '@/types/Customer';
 
 import { Button } from '../Button';
 import { TextInput } from '../TextInput';
-import { createCustomer, updateCustomer } from '@/utils/customer';
 
 interface CustomerFormProps {
 	id?: string;

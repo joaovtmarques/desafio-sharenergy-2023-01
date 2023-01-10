@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { MagnifyingGlass } from 'phosphor-react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useApi } from '@/hooks/useApi';
+import { useApi, useAuth } from '@/hooks';
 
 import {
 	BottomTabs,

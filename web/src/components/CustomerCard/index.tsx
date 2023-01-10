@@ -1,7 +1,6 @@
 import { Pencil, Trash } from 'phosphor-react';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useApi } from '@/hooks/useApi';
+import { useApi, useAuth } from '@/hooks';
 
 import { CustomerForm, DialogPrimitive, DialogTrigger } from '../CustomerForm';
 
@@ -83,7 +82,7 @@ export function CustomerItem(props: CustomerProps) {
 
 			<div
 				className="cursor-pointer"
-				onClick={() => handleDeleteCustomer(props.id)}>
+				onClick={() => handleDeleteCustomer(props.id!)}>
 				<Trash size={22} className="text-white" weight="light" />
 			</div>
 		</div>
