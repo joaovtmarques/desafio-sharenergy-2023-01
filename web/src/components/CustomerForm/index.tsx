@@ -10,7 +10,7 @@ import { CustomerProps } from '@/types/Customer';
 
 import { Button } from '../Button';
 import { TextInput } from '../TextInput';
-import { AlertPopup } from '../Alert';
+import { AlertCard } from '../Alert';
 
 interface CustomerFormProps {
 	id?: string;
@@ -197,7 +197,7 @@ export function CustomerForm({
 				</Dialog.Overlay>
 			</Dialog.Portal>
 			<div className={`${alert.type !== '' ? 'mt-8 py-8' : 'hidden'}`}>
-				<AlertPopup alert={alert} onCloseAlert={onCloseAlert} />
+				<AlertCard alert={alert} onCloseAlert={onCloseAlert} />
 			</div>
 		</Dialog.Root>
 	);

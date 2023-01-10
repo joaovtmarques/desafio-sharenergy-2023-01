@@ -9,7 +9,7 @@ interface AlertProps {
 	onCloseAlert: () => void;
 }
 
-export function AlertPopup({ alert, onCloseAlert }: AlertProps) {
+export function AlertCard({ alert, onCloseAlert }: AlertProps) {
 	return (
 		<Alert
 			btnText={'Ok'}

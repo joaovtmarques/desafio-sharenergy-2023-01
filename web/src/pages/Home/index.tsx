@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { useApi, useAuth } from '@/hooks';
 
 import {
+	AlertCard,
 	BottomTabs,
 	Container,
 	Header,
@@ -27,6 +28,27 @@ export function Home() {
 	const [users, setUsers] = useState<any[]>([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [usersPerPage, setUsersPerPage] = useState(8);
+	const [alert, setAlert] = useState({
+		type: '',
+		text: '',
+		show: false,
+	});
+
+	function onCloseAlert() {
+		setAlert({
+			type: '',
+			text: '',
+			show: false,
+		});
+	}
+
+	function onShowAlert(type: string, message: string, color?: string) {
+		setAlert({
+			type: type,
+			text: message,
+			show: true,
+		});
+	}
 
 	function handleFilter(filter: string) {
 		if (filter !== '') {
@@ -50,7 +72,8 @@ export function Home() {
 
 	function handleCurrentPage(type: string) {
 		if (type === 'prev') {
-			if (currentPage === 1) alert('Você já está na primeira página!');
+			if (currentPage === 1)
+				onShowAlert('error', 'Você já está na primeira página!');
 
 			setCurrentPage(currentPage - 1);
 		} else {
@@ -115,6 +138,9 @@ export function Home() {
 								onClick={() => handleCurrentPage('next')}
 							/>
 						</div>
+					</div>
+					<div className={`${alert.type !== '' ? 'mt-8 py-8' : 'hidden'}`}>
+						<AlertCard alert={alert} onCloseAlert={onCloseAlert} />
 					</div>
 					<div className="mt-12 md:mt-20 lg:mt-20 w-full flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap items-center justify-center md:gap-x-6 lg:gap-x-6">
 						{users.map((item: UserCardProps, key) => {
