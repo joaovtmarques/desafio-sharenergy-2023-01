@@ -1,4 +1,5 @@
 import { api } from '@/services/api';
+import { CreateCustomerProps, CustomerProps } from '@/types/Customer';
 import axios from 'axios';
 
 interface ListUsersPagination {
@@ -37,5 +38,35 @@ export const useApi = () => ({
 		const request = await axios.get('https://random.dog/woof.json');
 
 		return request.data.url;
+	},
+
+	getCustomers: async (token: string) => {
+		const request = await api.get('/customers', {
+			headers: { Authorization: `Bearer ${token}` },
+		});
+
+		return request.data;
+	},
+
+	createCustomer: async (data: CreateCustomerProps, token: string) => {
+		const request = await api.post('/customers', data, {
+			headers: { Authorization: `Bearer ${token}` },
+		});
+
+		return request.data;
+	},
+
+	updateCustomer: async (id: string, data: CustomerProps, token: string) => {
+		const request = await api.put(`/customers/${id}`, data, {
+			headers: { Authorization: `Bearer ${token}` },
+		});
+
+		return request.data;
+	},
+
+	deleteCustomer: async (id: string, token: string) => {
+		await api.delete(`/customers/${id}`, {
+			headers: { Authorization: `Bearer ${token}` },
+		});
 	},
 });

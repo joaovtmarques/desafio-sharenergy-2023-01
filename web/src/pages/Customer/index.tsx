@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -13,10 +14,27 @@ import {
 } from '@/components';
 
 import logoImg from '@/assets/logo.svg';
+import { useApi } from '@/hooks/useApi';
+import { CustomerProps } from '@/types/Customer';
+import { useAuth } from '@/hooks/useAuth';
 
 export function Customer() {
+	const api = useApi();
+	const auth = useAuth();
 	const location = useLocation();
 	const navigate = useNavigate();
+
+	const [customers, setCustomers] = useState<CustomerProps[]>([]);
+
+	async function handleGetCustomers() {
+		const customers = await api.getCustomers(auth.token!);
+
+		setCustomers(customers.slice(0).reverse());
+	}
+
+	useEffect(() => {
+		handleGetCustomers();
+	}, [customers]);
 
 	return (
 		<>
@@ -41,7 +59,9 @@ export function Customer() {
 						</div>
 					</div>
 					<div className="flex-1 gap-y-8 mt-12 md:mt-20 lg:mt-20 flex flex-col">
-						<CustomerItem />
+						{customers.map((item, key) => {
+							return <CustomerItem key={key} {...item} />;
+						})}
 					</div>
 				</div>
 			</Container>

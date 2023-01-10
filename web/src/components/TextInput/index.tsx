@@ -1,5 +1,6 @@
 import { EyeSlash, Eye } from 'phosphor-react';
-import { useState, InputHTMLAttributes, HTMLAttributes } from 'react';
+import { useState, HTMLAttributes } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form/dist/types';
 
 interface TextInputProps
 	extends HTMLAttributes<HTMLDivElement | HTMLInputElement> {
@@ -10,6 +11,7 @@ interface TextInputProps
 	height?: string;
 	text?: string;
 	textLg?: string;
+	register?: UseFormRegisterReturn<string>;
 }
 
 export function TextInput({
@@ -20,6 +22,7 @@ export function TextInput({
 	height,
 	text,
 	textLg,
+	register,
 	...props
 }: TextInputProps) {
 	const [hidden, setHidden] = useState(true);
@@ -39,6 +42,7 @@ export function TextInput({
 						: type
 				}
 				placeholder={placeholder}
+				{...register}
 				className={`
 				flex-1 w-full outline-none px-8 bg-black2 text-gray1 ${
 					text && textLg

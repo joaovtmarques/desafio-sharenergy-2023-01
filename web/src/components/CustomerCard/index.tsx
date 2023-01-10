@@ -1,11 +1,22 @@
 import { Pencil, Trash } from 'phosphor-react';
-import * as Dialog from '@radix-ui/react-dialog';
+
+import { useAuth } from '@/hooks/useAuth';
+import { useApi } from '@/hooks/useApi';
 
 import { CustomerForm, DialogPrimitive, DialogTrigger } from '../CustomerForm';
 
+import { CustomerProps } from '@/types/Customer';
+
 import avatarImg from '../../assets/avatar.svg';
 
-export function CustomerItem() {
+export function CustomerItem(props: CustomerProps) {
+	const auth = useAuth();
+	const api = useApi();
+
+	async function handleDeleteCustomer(id: string) {
+		await api.deleteCustomer(id, auth.token!);
+	}
+
 	return (
 		<div className="w-full p-6 rounded-xl bg-black2 flex flex-col md:flex-row lg:flex-row gap-y-6 items-center justify-between hover:opacity-90">
 			<DialogPrimitive>
@@ -15,7 +26,7 @@ export function CustomerItem() {
 					</div>
 				</DialogTrigger>
 
-				<CustomerForm />
+				<CustomerForm id={props.id} defaultValues={props} />
 			</DialogPrimitive>
 
 			<div className="w-full flex flex-col items-center md:m-4 lg:m-4 justify-between gap-4 md:flex-row lg:flex-row">
@@ -25,10 +36,10 @@ export function CustomerItem() {
 					</div>
 					<div className="text-center md:text-left lg:text-left">
 						<p className="text-sm lg:text-base text-white font-medium">
-							João Vitor Marques
+							{props.name}
 						</p>
 						<p className="text-[10px] lg:text-xs text-gray1 font-regular">
-							jvsilvam@outlook.com
+							{props.email}
 						</p>
 					</div>
 				</div>
@@ -37,19 +48,19 @@ export function CustomerItem() {
 						Telefone
 					</p>
 					<p className="text-sm lg:text-base text-white font-medium ">
-						0000000000
+						{props.phoneNumber}
 					</p>
 				</div>
 				<div className="h-full lg:w-auto text-center md:text-left lg:text-left">
 					<p className="text-[10px] lg:text-xs text-gray1 font-regular">CPF</p>
 					<p className="text-sm lg:text-base text-white font-medium ">
-						000.000.000-00
+						{props.cpf}
 					</p>
 				</div>
 				<div className="h-full lg:w-auto text-center md:text-left lg:text-left">
 					<p className="text-[10px] lg:text-xs text-gray1 font-regular">Rua</p>
 					<p className="text-sm lg:text-base text-white font-medium">
-						Antônio Rossi, 000
+						{props.address.street}
 					</p>
 				</div>
 				<div className="h-full lg:w-auto text-center md:text-left lg:text-left">
@@ -57,7 +68,7 @@ export function CustomerItem() {
 						Bairro
 					</p>
 					<p className="text-sm lg:text-base text-white font-medium">
-						Village das Flores
+						{props.address.district}
 					</p>
 				</div>
 				<div className="h-full lg:w-auto text-center md:text-left lg:text-left">
@@ -65,12 +76,14 @@ export function CustomerItem() {
 						Cidade - Estado
 					</p>
 					<p className="text-sm lg:text-base text-white font-medium">
-						Caçapava - São Paulo
+						{props.address.city} - {props.address.state}
 					</p>
 				</div>
 			</div>
 
-			<div className="cursor-pointer">
+			<div
+				className="cursor-pointer"
+				onClick={() => handleDeleteCustomer(props.id)}>
 				<Trash size={22} className="text-white" weight="light" />
 			</div>
 		</div>
