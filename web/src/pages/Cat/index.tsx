@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { MagnifyingGlass } from 'phosphor-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -18,7 +19,20 @@ export function Cat() {
 	const location = useLocation();
 	const navigate = useNavigate();
 
-	const arr = [1, 2, 3, 4, 5];
+	const [code, setCode] = useState(404);
+	const [httpCat, setHttpCat] = useState('');
+
+	function handleHttpCat(code: number) {
+		if (code < 100 || code > 599) {
+			setHttpCat('https://pbs.twimg.com/media/By0JRZ7CUAAA4W5.png:large');
+		} else {
+			setHttpCat(`https://http.cat/${code}.jpg`);
+		}
+	}
+
+	useEffect(() => {
+		handleHttpCat(code);
+	}, [code]);
 
 	return (
 		<>
@@ -42,7 +56,8 @@ export function Cat() {
 									placeholder="Digite um código HTTP (ex: 201)"
 									noMargin
 									icon={<MagnifyingGlass className="text-gray1" size={22} />}
-									onClick={() => console.log('oi')}
+									onChange={(e: any) => setCode(e.target.value)}
+									onClick={() => handleHttpCat(code)}
 								/>
 							</div>
 						</div>
@@ -50,7 +65,7 @@ export function Cat() {
 					<div className="mt-12 md:mt-20 lg:mt-20 w-full flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap items-center justify-start md:gap-x-8 lg:gap-x-8">
 						<div className="w-full h-auto md:h-[300px] md:w-[490px] lg:h-[400px] lg:w-[590px] p-[1.5px] bg-border overflow-hidden rounded-xl">
 							<img
-								src="https://avatars.githubusercontent.com/u/74778269?v=4"
+								src={httpCat}
 								alt="Cat"
 								className="w-full h-full rounded-xl"
 							/>
