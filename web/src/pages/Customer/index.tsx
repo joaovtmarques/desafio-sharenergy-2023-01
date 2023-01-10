@@ -15,9 +15,11 @@ import {
 	CustomerItem,
 	CustomerForm,
 	CustomerFormButton,
+	Button,
 } from '@/components';
 
 import logoImg from '@/assets/logo.svg';
+import { DialogPrimitive, DialogTrigger } from '@/components/CustomerForm';
 
 export function Customer() {
 	const api = useApi();
@@ -53,10 +55,7 @@ export function Customer() {
 				<div className="flex-1 pb-8">
 					<div className="w-full flex flex-col md:flex-row lg:flex-row items-center">
 						<div className="flex-1 w-full flex flex-col space-y-4 md:space-y-0 lg:space-y-0 md:flex-row lg:flex-row md:items-center lg:items-center md:space-x-8 lg:space-x-8 md:pr-16 lg:pr-16">
-							<Dialog.Root>
-								<CustomerFormButton />
-								<CustomerForm />
-							</Dialog.Root>
+							<CustomerFormButton />
 						</div>
 					</div>
 					<div className="flex-1 gap-y-8 mt-12 md:mt-20 lg:mt-20 flex flex-col">

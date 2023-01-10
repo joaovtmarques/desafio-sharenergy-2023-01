@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Pencil, Trash } from 'phosphor-react';
 
 import { useApi, useAuth } from '@/hooks';
@@ -12,6 +13,8 @@ export function CustomerItem(props: CustomerProps) {
 	const auth = useAuth();
 	const api = useApi();
 
+	const [open, setOpen] = useState(false);
+
 	async function handleDeleteCustomer(id: string) {
 		await api.deleteCustomer(id, auth.token!);
 	}
@@ -20,12 +23,16 @@ export function CustomerItem(props: CustomerProps) {
 		<div className="w-full p-6 rounded-xl bg-black2 flex flex-col md:flex-row lg:flex-row gap-y-6 items-center justify-between hover:opacity-90">
 			<DialogPrimitive>
 				<DialogTrigger>
-					<div className="cursor-pointer">
+					<div className="cursor-pointer" onClick={() => setOpen(true)}>
 						<Pencil size={22} className="text-white" weight="light" />
 					</div>
+					<CustomerForm
+						id={props.id}
+						defaultValues={props}
+						open={open}
+						setOpen={setOpen}
+					/>
 				</DialogTrigger>
-
-				<CustomerForm id={props.id} defaultValues={props} />
 			</DialogPrimitive>
 
 			<div className="w-full flex flex-col items-center md:m-4 lg:m-4 justify-between gap-4 md:flex-row lg:flex-row">
