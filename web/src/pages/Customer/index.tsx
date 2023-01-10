@@ -3,15 +3,16 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
 	BottomTabs,
-	Button,
 	Container,
 	Header,
 	LogoutButton,
 	Menu,
+	CustomerItem,
+	CustomerForm,
+	CustomerFormButton,
 } from '@/components';
 
 import logoImg from '@/assets/logo.svg';
-import { CustomerItem, CustomerForm, CustomerFormButton } from '@/components';
 
 export function Customer() {
 	const location = useLocation();
