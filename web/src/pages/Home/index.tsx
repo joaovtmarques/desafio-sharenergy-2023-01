@@ -21,6 +21,7 @@ import logoImg from '@/assets/logo.svg';
 
 export function Home() {
 	const auth = useAuth();
+	const api = useApi();
 	const location = useLocation();
 
 	const [filter, setFilter] = useState();
@@ -28,13 +29,9 @@ export function Home() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [usersPerPage, setUsersPerPage] = useState(8);
 
-	const lastUserIndex = currentPage * usersPerPage;
-	const firstUserIndex = lastUserIndex - usersPerPage;
-	const currentUsers = users.slice(firstUserIndex, lastUserIndex);
-
 	function handleFilter(filter: string) {
 		if (filter !== '') {
-			var filteredUsers = [];
+			let filteredUsers = [];
 
 			filteredUsers = users.filter(
 				user =>
@@ -63,7 +60,7 @@ export function Home() {
 	}
 
 	async function handleUsersPerPage(currentPage: number, usersPerPage: number) {
-		const usersList = await useApi().listUsers({
+		const usersList = await api.listUsers({
 			page: currentPage,
 			perPage: usersPerPage,
 		});

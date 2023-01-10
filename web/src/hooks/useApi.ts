@@ -32,4 +32,10 @@ export const useApi = () => ({
 
 		return request.data;
 	},
+
+	getDog: async () => {
+		const request = await axios.get('https://random.dog/woof.json');
+
+		return request.data.url;
+	},
 });
