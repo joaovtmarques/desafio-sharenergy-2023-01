@@ -53,7 +53,7 @@ $ npm run start:dev ou yarn start:dev
 $ http://localhost:3000/docs
 ```
 ```bash
-# Acesse em outro terminar a pasta 'web'
+# Acesse em outro terminal a pasta 'web'
 $ cd web
 # Baixe as depêndencias
 $ npm/yarn install
